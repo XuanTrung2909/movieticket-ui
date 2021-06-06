@@ -1,0 +1,53 @@
+.login {
+  background-image: url("https://tix.vn/app/assets/img/icons/bg2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  .login_main {
+    margin: auto;
+    width: 40rem;
+    height: 60rem;
+    background-color: $color-bg-sign;
+    display: flex;
+    padding: 4rem;
+    .form {
+      margin: auto;
+      .title {
+        color: $color-white;
+        text-align: center;
+        font-size: $font-12;
+        img {
+          width: 20rem;
+          margin-bottom: 5rem;
+        }
+        margin-bottom: 2rem;
+      }
+      .form_control {
+        border-color: white;
+        .input_label {
+          color: $color-white;
+          font-size: $font-14;
+        }
+        .input {
+          font-size: $font-14;
+          color: $color-white;
+          &::after {
+            border-bottom: 0.2rem solid $color-primary;
+          }
+          &::before{
+            border-bottom: 0.1rem solid $color-white;
+          }
+        }
+      }
+
+      button {
+        background-color: $color-primary;
+        color: $color-white;
+        font-size: $font-14;
+        margin-top: 9rem;
+      }
+    }
+  }
+}

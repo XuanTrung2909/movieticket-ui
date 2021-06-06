@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 10px;
+}
+.flex{
+    display: flex;
+}
+.show{
+    display: show;
+}
+.hide{
+    display: none;
+}
+.link, .nav-link{
+    text-decoration: none;
+    color: black;
+}

@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import './Assets/scss/style.scss';
+import { CssBaseline } from "@material-ui/core";
+import Login from "./Pages/Login/Login";
+import UserTemplate from './Template/UseTemPlate/UserTemplate'
+import Home from "./Pages/Home/Home";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CssBaseline />
+      <BrowserRouter>
+        <Switch>
+          <Route path='/login' exact component={Login} />
+          <UserTemplate path='/' exact component={Home} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
