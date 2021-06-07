@@ -1,4 +1,4 @@
-.login {
+.sign_up {
   background-image: url("https://tix.vn/app/assets/img/icons/bg2.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -9,15 +9,15 @@
     height: 100%;
   }
   
-  .login_main {
+  .sign_up_main {
     margin: auto;
     width: 40rem;
-    height: 60rem;
+    height: 70rem;
     background-color: $color-bg-sign;
     display: flex;
-    padding: 4rem;
+    padding: 1rem 4rem;
     border-radius: 1rem;
-    @media screen and (max-width: $breakpoint-sm) {
+    @media screen and (max-width: 700px) {
       width: 100%;
       height: 100%;
     }
@@ -29,9 +29,9 @@
         font-size: $font-12;
         img {
           width: 20rem;
-          margin-bottom: 5rem;
+          margin-bottom: 2rem;
         }
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
       }
       .form_control {
         border-color: white;
@@ -58,7 +58,7 @@
         background-color: $color-primary;
         color: $color-white;
         font-size: $font-14;
-        margin-top: 5rem;
+        margin-top: 2rem;
         margin-bottom: 1rem;
       }
       p{

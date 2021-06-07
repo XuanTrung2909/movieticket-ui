@@ -66,7 +66,7 @@ export default function Header(props) {
                 </Link>
               </List>
             ) : (
-              <List className="sign">
+              <List className="header_sign">
                 <Link className="link" to="/login">
                   <Button>Đăng Nhập</Button>
                 </Link>

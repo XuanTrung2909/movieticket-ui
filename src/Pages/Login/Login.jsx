@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../../Redux/Actions/AuthAction";
+import { TouchAppRounded } from "@material-ui/icons";
 
 export default function Login(props) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function Login(props) {
       matKhau: "",
     },
     validationSchema: Yup.object().shape({
-      taiKhoan: Yup.string().required("Vui lòng nhập taiKhoan"),
+      taiKhoan: Yup.string().required("Vui lòng nhập tài khoản"),
       matKhau: Yup.string().required("Vui lòng nhập mật khẩu"),
     }),
     onSubmit: (values) => {
@@ -58,9 +59,14 @@ export default function Login(props) {
               className="input"
               fullWidth
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.taiKhoan}
             />
-            <FormHelperText error className='form_error'>{formik.errors.taiKhoan}</FormHelperText>
+            {formik.errors.taiKhoan && formik.touched.taiKhoan ? (
+              <FormHelperText error className="form_error">
+                {formik.errors.taiKhoan}
+              </FormHelperText>
+            ) : null}
           </FormControl>
           <FormControl
             fullWidth
@@ -75,14 +81,23 @@ export default function Login(props) {
               className="input"
               fullWidth
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.matKhau}
             />
-            <FormHelperText error className='form_error'>{formik.errors.matKhau}</FormHelperText>
+            {formik.errors.matKhau && formik.touched.matKhau ? (
+              <FormHelperText error className="form_error">
+                {formik.errors.matKhau}
+              </FormHelperText>
+            ) : null}
           </FormControl>
-          <FormControl fullWidth margin='normal'>
-            <Button size="large" type='submit'>
+          <FormControl fullWidth margin="normal">
+            <Button size="large" type="submit">
               Đăng Nhập
             </Button>
+            <p>
+              Nếu bạn chưa có tài khoản, hãy{" "}
+              <Link to="/sign-up">đăng ký tài khoản tại đây</Link>
+            </p>
           </FormControl>
         </form>
       </div>
