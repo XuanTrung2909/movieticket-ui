@@ -8,16 +8,18 @@ import {
   List,
   Toolbar,
   Chip,
-  
+  Avatar,
 } from "@material-ui/core";
-import FaceIcon from '@material-ui/icons/Face';
+
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { USER_LOGIN } from "../../Ulti/setting";
 
 export default function Header(props) {
   const { userName } = useSelector((state) => state.AuthReducer);
+  
 
   const [checkMenu, setCheckMenu] = useState(false);
   const handleOpenMenu = () => {
@@ -26,6 +28,9 @@ export default function Header(props) {
   const handleCloseMenu = () => {
     setCheckMenu(false);
   };
+  const handleDeleteUserCurrent = () => {
+    localStorage.removeItem(USER_LOGIN);
+  }
   return (
     <div className="header">
       <AppBar position="fixed" color="default">
@@ -46,24 +51,11 @@ export default function Header(props) {
           </Hidden>
           <Hidden smDown>
             {userName.trim() !== "" ? (
-              <List>
-                <Link to="/profile">
-                  <Chip
-                    variant="outlined"
-                    color="primary"
-                    label={userName}
-                    icon={<FaceIcon />}
-                  />
+              <List className="signed">
+                <Link to="/profile" className="link">
+                  <Chip label={userName} avatar={<Avatar className='avatar'>TIX</Avatar>} className='chip'></Chip>
                 </Link>
-
-                <Link>
-                  <Chip
-                    variant="outlined"
-                    color="secondary"
-                    label="Đăng xuất"
-                    // onClick={handleDelete}
-                  />
-                </Link>
+                <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
               </List>
             ) : (
               <List className="header_sign">
@@ -93,12 +85,23 @@ export default function Header(props) {
         onClose={handleCloseMenu}
       >
         <List className="sign_mobile">
-          <Link className="link">
-            <Button>Đăng Nhập</Button>
-          </Link>
-          <Link className="link">
-            <Button>Đăng Ký</Button>
-          </Link>
+        {userName.trim() !== "" ? (
+              <List className="signed_mobile">
+                <Link to="/profile" className="link">
+                  <Chip label={userName} avatar={<Avatar className='avatar' >TIX</Avatar>} className='chip'></Chip>
+                </Link>
+                <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
+              </List>
+            ) : (
+              <List className="sign_mobile">
+                <Link className="link" to="/login">
+                  <Button>Đăng Nhập</Button>
+                </Link>
+                <Link className="link" to="/sign-up">
+                  <Button>Đăng Ký</Button>
+                </Link>
+              </List>
+            )}
         </List>
         <Divider />
         <List className="nav_mobile">

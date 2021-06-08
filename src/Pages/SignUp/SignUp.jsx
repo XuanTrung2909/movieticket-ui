@@ -9,10 +9,11 @@ import {
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { useDispatch } from "react-redux";
+import { postSignUp } from "../../Redux/Actions/AuthAction";
+import { useDispatch } from "react-redux";
 
 export default function SignUp(props) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +31,7 @@ export default function SignUp(props) {
       email: Yup.string().required("Vui lòng nhập Email"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(postSignUp(values));
     },
   });
   return (

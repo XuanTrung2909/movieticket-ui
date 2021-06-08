@@ -16,7 +16,7 @@ export const postLogin = (userLogin) => {
           userName: result.data.taiKhoan
       });
 
-      localStorage.setItem(USER_LOGIN, JSON.stringify(result.data));
+      setTimeout(localStorage.setItem(USER_LOGIN, JSON.stringify(result.data)),30000);
 
 
       // alert('Đăng nhập thành công !');
@@ -28,4 +28,20 @@ export const postLogin = (userLogin) => {
       //?: optional chaining
   }
 }
+}
+
+
+export const postSignUp = (userSignUp) => {
+  return async() => {
+    
+    try {
+      await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy`,
+        method: 'POST',
+        data: userSignUp
+      })
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
 }

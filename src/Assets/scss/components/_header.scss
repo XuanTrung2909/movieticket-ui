@@ -1,71 +1,81 @@
-.header{
-    .justify{
-        justify-content: space-between;
-        color: $color-white;
-        .logo{
-            img{
-                width: 6rem;
-                @media screen and (max-width: $breakpoint-sm) {
-                    width: 5rem;
-                }
-            }
+.header {
+  .justify {
+    justify-content: space-between;
+    color: $color-white;
+    .logo {
+      img {
+        width: 6rem;
+        @media screen and (max-width: $breakpoint-sm) {
+          width: 5rem;
         }
-        .nav{
-            .link{
-                font-size: $font-16;
-                margin: 0 2rem;
-                transition: all 0.5s;
-                &:hover{
-                    font-weight: bold;
-                    color: $color-primary;
-                }
-            }
-        }
-        .header_sign{
-            .link{
-                button{
-                    font-size: $font-14;
-                    margin: 0 2rem;
-                }
-            }
-        }
+      }
     }
+    .nav {
+      .link {
+        font-size: $font-16;
+        margin: 0 2rem;
+        transition: all 0.5s;
+        &:hover {
+          font-weight: bold;
+          color: $color-primary;
+        }
+      }
+    }
+    .header_sign {
       
-    
-     
-}
-.menu_mobile{
-    font-size: $font-14;
-    .paper{
-        left: 30%;
-        right: 0;
-    }
-    .sign_mobile{
-            
-        display: flex;
-        justify-content: space-around;
-        .link{
-            display: block;
-            margin: 0 2rem;
-            button{
-                font-size: 1.4rem;
-            }
+      .link {
+        button {
+          font-size: $font-14;
+          margin: 0 2rem;
         }
+      }
     }
-        
-    .nav_mobile{
-        display: block;
-        
-        .link{
-            display: block;
-            margin: 2rem;
-            transition: all 0.5s;
-            &:hover{
-                font-weight: bold;
-                color: $color-primary;
-            }
+    .signed {
+      .link {
+        .chip{
+          font-size: $font-14;
+          
         }
-    } 
-         
+        margin: 0 2rem;
+        
+      }
+      button{
+        font-size: $font-14;
+        
+      }
+    }
+  }
 }
+.menu_mobile {
+  font-size: $font-14;
+  .paper {
+    left: 30%;
+    right: 0;
+  }
+  .sign_mobile, .signed_mobile {
+    display: flex;
+    justify-content: space-around;
+    .link {
+      display: block;
+      margin: 0 2rem;
+      button {
+        font-size: 1rem;
+      }
+    }
+  }
 
+  .nav_mobile {
+    display: block;
+
+    .link {
+      display: block;
+      margin: 2rem;
+      transition: all 0.5s;
+      &:hover {
+        font-weight: bold;
+        color: $color-primary;
+      }
+    }
+  }
+  
+}
