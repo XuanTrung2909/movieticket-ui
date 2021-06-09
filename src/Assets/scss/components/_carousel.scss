@@ -1,0 +1,36 @@
+.carousel{
+  margin-top: 6rem;
+  .bg_img{
+    height: 80rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    .overlay{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $color-bg-overlay;
+      display: none;
+      animation: animationShow 0.5s;
+      svg{
+        margin: auto;
+        color: $color-white;
+        font-size: 10rem;
+      }
+    }
+    &:hover .overlay{
+      display: flex;
+    }
+  }
+}
+@keyframes animationShow{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}

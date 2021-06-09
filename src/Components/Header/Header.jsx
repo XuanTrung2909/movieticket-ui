@@ -19,7 +19,6 @@ import { USER_LOGIN } from "../../Ulti/setting";
 
 export default function Header(props) {
   const { userName } = useSelector((state) => state.AuthReducer);
-  
 
   const [checkMenu, setCheckMenu] = useState(false);
   const handleOpenMenu = () => {
@@ -30,16 +29,19 @@ export default function Header(props) {
   };
   const handleDeleteUserCurrent = () => {
     localStorage.removeItem(USER_LOGIN);
-  }
+    window.location.reload();
+  };
   return (
     <div className="header">
       <AppBar position="fixed" color="default">
         <Toolbar className="justify">
           <div className="logo">
-            <img
-              src="https://tix.vn/app/assets/img/icons/web-logo.png"
-              alt="Tix-logo"
-            />
+            <Link className="link" to="/">
+              <img
+                src="https://tix.vn/app/assets/img/icons/web-logo.png"
+                alt="Tix-logo"
+              />
+            </Link>
           </div>
           <Hidden smDown>
             <List className="nav">
@@ -53,7 +55,11 @@ export default function Header(props) {
             {userName.trim() !== "" ? (
               <List className="signed">
                 <Link to="/profile" className="link">
-                  <Chip label={userName} avatar={<Avatar className='avatar'>TIX</Avatar>} className='chip'></Chip>
+                  <Chip
+                    label={userName}
+                    avatar={<Avatar className="avatar">TIX</Avatar>}
+                    className="chip"
+                  ></Chip>
                 </Link>
                 <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
               </List>
@@ -85,23 +91,27 @@ export default function Header(props) {
         onClose={handleCloseMenu}
       >
         <List className="sign_mobile">
-        {userName.trim() !== "" ? (
-              <List className="signed_mobile">
-                <Link to="/profile" className="link">
-                  <Chip label={userName} avatar={<Avatar className='avatar' >TIX</Avatar>} className='chip'></Chip>
-                </Link>
-                <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
-              </List>
-            ) : (
-              <List className="sign_mobile">
-                <Link className="link" to="/login">
-                  <Button>Đăng Nhập</Button>
-                </Link>
-                <Link className="link" to="/sign-up">
-                  <Button>Đăng Ký</Button>
-                </Link>
-              </List>
-            )}
+          {userName.trim() !== "" ? (
+            <List className="signed_mobile">
+              <Link to="/profile" className="link">
+                <Chip
+                  label={userName}
+                  avatar={<Avatar className="avatar">TIX</Avatar>}
+                  className="chip"
+                ></Chip>
+              </Link>
+              <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
+            </List>
+          ) : (
+            <List className="sign_mobile">
+              <Link className="link" to="/login">
+                <Button>Đăng Nhập</Button>
+              </Link>
+              <Link className="link" to="/sign-up">
+                <Button>Đăng Ký</Button>
+              </Link>
+            </List>
+          )}
         </List>
         <Divider />
         <List className="nav_mobile">
