@@ -6,6 +6,7 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import { useDispatch } from 'react-redux';
 import {OPEN_MODAL_PLAY_VIDEO} from './../../Ulti/setting';
 
+
 export default function Carousel(props) {
   const {movieList} = props;
   const dispatch = useDispatch();

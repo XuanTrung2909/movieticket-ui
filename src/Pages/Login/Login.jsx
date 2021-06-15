@@ -5,16 +5,54 @@ import {
   Input,
   FormHelperText,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../Redux/Actions/AuthAction";
+import LoadingPage from "../../Components/LoadingPage/LoadingPage";
 
+import { Dialog } from "@material-ui/core";
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Login(props) {
+  const [open, setOpen] = useState(false);
+ 
+  const { isLoadingPage, errorLoadData, userName } = useSelector(
+    (state) => state.AuthReducer
+  );
+
+
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  const handleCloseAlert = () => {
+    setOpen(false);
+  }
+
+
+  const showError = () => {
+    if(errorLoadData !== null){
+      setOpen(true);
+    }
+  }
+
+  if(userName !== ''){
+    history.goBack();
+  }
+
+
+  useEffect(() => {
+    if(errorLoadData !== null){
+      setOpen(true);
+    }
+  },[errorLoadData])
 
   const formik = useFormik({
     initialValues: {
@@ -91,7 +129,9 @@ export default function Login(props) {
             ) : null}
           </FormControl>
           <FormControl fullWidth margin="normal">
-            <Button size="large" type="submit">
+            <Button size="large" type="submit" 
+            onClick={showError}
+            >
               Đăng Nhập
             </Button>
             <p>
@@ -101,6 +141,25 @@ export default function Login(props) {
           </FormControl>
         </form>
       </div>
+      {isLoadingPage ? <LoadingPage /> : null}
+      <Dialog
+        open={open}
+        onClose={handleCloseAlert}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Thông báo Lỗi</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {errorLoadData}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAlert} color="primary">
+            Tôi đã hiểu
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

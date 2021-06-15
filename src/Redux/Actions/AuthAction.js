@@ -1,9 +1,12 @@
 import axios from "axios"
 
-import { FETCH_LOGIN, USER_LOGIN } from "../../Ulti/setting"
+import { FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, REQUEST_LOADING, USER_LOGIN } from "../../Ulti/setting"
 
 export const postLogin = (userLogin) => {
   return async (dispatch) => {
+    dispatch({
+      type: REQUEST_LOADING
+    })
     try {
       const result = await axios({
           url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap',
@@ -12,20 +15,21 @@ export const postLogin = (userLogin) => {
       });
   
       dispatch({
-          type: FETCH_LOGIN,
+          type: FETCH_LOGIN_SUCCESS,
           userName: result.data.taiKhoan
       });
 
       setTimeout(localStorage.setItem(USER_LOGIN, JSON.stringify(result.data)),30000);
 
 
-      // alert('Đăng nhập thành công !');
-      // history.push('/home')
+     
 
-  } catch (errors) {
+  } catch (error) {
       
-      console.log('errors:',errors.response.data);
-      //?: optional chaining
+      dispatch({
+        type: FETCH_LOGIN_ERROR,
+        errorLoadData: error.response.data
+      })
   }
 }
 }

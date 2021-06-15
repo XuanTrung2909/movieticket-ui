@@ -8,6 +8,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Modal from "./Components/Modal/Modal";
 
 
+
 function App() {
   
   return (
@@ -21,6 +22,7 @@ function App() {
         </Switch>
       </BrowserRouter>
       <Modal />
+      
     </div>
   );
 }

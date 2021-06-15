@@ -1,0 +1,14 @@
+.loading_page{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  background-color: $color-bg-overlay;
+  img{
+    margin: auto;
+    width: 20rem;
+  }
+}
