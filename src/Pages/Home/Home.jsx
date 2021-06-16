@@ -9,6 +9,7 @@ export default function Home(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.title = 'Tix - Trang Chủ'
         dispatch(getMovieByGroup('GP01'));
     }, [])
 

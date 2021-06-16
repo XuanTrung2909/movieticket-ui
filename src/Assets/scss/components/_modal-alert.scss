@@ -1,0 +1,40 @@
+.modal_alert{
+  text-align: center;
+  .title_error{
+    svg{
+      font-size: $font-50;
+      color: $color-primary;
+    }
+  }
+  .title_success{
+    svg{
+      font-size: $font-50;
+      color: $color-secondary;
+    }
+  }
+  .content{
+    font-size: $font-16;
+    min-width: 30rem;
+  }
+  .action{
+    display: flex;
+    button{
+      display: block;
+      margin: 0 auto;
+      font-size: $font-16;
+      min-width: 8rem;
+    }
+    .btn_error{
+      border-color: $color-primary;
+      &:hover{
+        background-color: $color-primary;
+      }
+    }
+    .btn_success{
+      border-color: $color-secondary;
+      &:hover{
+        background-color: $color-secondary;
+      }
+    }
+  }
+}

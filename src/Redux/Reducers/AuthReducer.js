@@ -1,4 +1,4 @@
-import { FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, REQUEST_LOADING, RESET_ERROR, USER_LOGIN } from "../../Ulti/setting";
+import { FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, FETCH_SIGN_UP_SUCCESS, REQUEST_LOADING, RESET_ERROR, USER_LOGIN } from "../../Ulti/setting";
 
 let localUserName='';
 if(localStorage.getItem(USER_LOGIN)){
@@ -10,6 +10,7 @@ const stateDefault = {
   userName: localUserName,
   isLoadingPage: false,
   errorLoadData: null,
+  isSignUp: false
 }
 
 export const AuthReducer = (state = stateDefault, action) => {
@@ -30,6 +31,12 @@ export const AuthReducer = (state = stateDefault, action) => {
     }
     case RESET_ERROR: {
       state.errorLoadData = null;
+      state.isSignUp = false;
+      return {...state};
+    }
+    case FETCH_SIGN_UP_SUCCESS: {
+      state.isSignUp = true;
+      console.log(456);
       return {...state};
     }
   

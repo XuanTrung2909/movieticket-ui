@@ -10,10 +10,40 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postSignUp } from "../../Redux/Actions/AuthAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Dialog } from "@material-ui/core";
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { useState } from "react";
+import { useEffect } from "react";
+import { RESET_ERROR } from "../../Ulti/setting";
 
 export default function SignUp(props) {
+  const [open, setOpen] = useState(false);
+  const {errorLoadData, isSignUp} = useSelector(state => state.AuthReducer);
+
   const dispatch = useDispatch();
+
+
+  const handleCloseAlert = () => {
+    setOpen(false);
+    dispatch({
+      type: RESET_ERROR
+    })
+  }
+  useEffect(() => {
+    document.title = 'Tix - Đăng Ký';
+  },[])
+  
+  useEffect(() => {
+    console.log(isSignUp);
+    if(errorLoadData !== null || isSignUp === true){
+      setOpen(true)
+    }
+  },[errorLoadData, isSignUp])
 
   const formik = useFormik({
     initialValues: {
@@ -145,7 +175,12 @@ export default function SignUp(props) {
             />
           </FormControl>
           <FormControl fullWidth margin="normal">
-            <Button size="large" type="submit">
+            <Button size="large" type="submit" onClick={() => {
+              console.log(isSignUp);
+              if(errorLoadData !== null || isSignUp === true){
+                setOpen(true);
+              }
+            }}>
               Đăng Nhập
             </Button>
             <p>
@@ -155,6 +190,29 @@ export default function SignUp(props) {
           </FormControl>
         </form>
       </div>
+    
+      <Dialog
+        open={open}
+        onClose={handleCloseAlert}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        className='modal_alert'
+      >
+        <DialogTitle id="alert-dialog-title" className={isSignUp ? 'title_success' : 'title_error'}>
+          <ErrorOutlineIcon /> 
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description" className='content'>
+            {errorLoadData}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions className='action'>
+          <Button onClick={handleCloseAlert} variant='outlined' className={isSignUp ? 'btn_success' : 'btn_error'}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    
     </div>
   );
 }

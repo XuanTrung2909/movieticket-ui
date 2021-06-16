@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, REQUEST_LOADING, USER_LOGIN } from "../../Ulti/setting"
+import { FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, FETCH_SIGN_UP_SUCCESS, REQUEST_LOADING, USER_LOGIN } from "../../Ulti/setting"
 
 export const postLogin = (userLogin) => {
   return async (dispatch) => {
@@ -36,7 +36,7 @@ export const postLogin = (userLogin) => {
 
 
 export const postSignUp = (userSignUp) => {
-  return async() => {
+  return async(dispatch) => {
     
     try {
       await axios({
@@ -44,8 +44,15 @@ export const postSignUp = (userSignUp) => {
         method: 'POST',
         data: userSignUp
       })
+      dispatch({
+        type: FETCH_SIGN_UP_SUCCESS
+      })
+      console.log(123);
     } catch (error) {
-      console.log(error.response.data);
+      dispatch({
+        type: FETCH_LOGIN_ERROR,
+        errorLoadData: error.response.data
+      })
     }
   }
 }

@@ -20,6 +20,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useState } from "react";
 import { useEffect } from "react";
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { RESET_ERROR } from "../../Ulti/setting";
 
 export default function Login(props) {
   const [open, setOpen] = useState(false);
@@ -34,7 +36,13 @@ export default function Login(props) {
 
   const handleCloseAlert = () => {
     setOpen(false);
+    dispatch({
+      type: RESET_ERROR
+    })
   }
+  useEffect(() => {
+    document.title = 'Tix - Đăng Nhập';
+  },[])
 
 
   const showError = () => {
@@ -136,7 +144,7 @@ export default function Login(props) {
             </Button>
             <p>
               Nếu bạn chưa có tài khoản, hãy{" "}
-              <Link to="/sign-up">đăng ký tài khoản tại đây</Link>
+              <Link to="/sign-up" >đăng ký tài khoản tại đây</Link>
             </p>
           </FormControl>
         </form>
@@ -147,16 +155,19 @@ export default function Login(props) {
         onClose={handleCloseAlert}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        className='modal_alert'
       >
-        <DialogTitle id="alert-dialog-title">Thông báo Lỗi</DialogTitle>
+        <DialogTitle id="alert-dialog-title" className='title_error'>
+          <ErrorOutlineIcon /> 
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText id="alert-dialog-description" className='content'>
             {errorLoadData}
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseAlert} color="primary">
-            Tôi đã hiểu
+        <DialogActions className='action'>
+          <Button onClick={handleCloseAlert} variant='outlined' className='btn_error' >
+            OK
           </Button>
         </DialogActions>
       </Dialog>
