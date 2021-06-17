@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./Assets/scss/style.scss";
+import 'react-tabs/style/react-tabs.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import { CssBaseline } from "@material-ui/core";
 import Login from "./Pages/Login/Login";
 import UserTemplate from "./Template/UseTemPlate/UserTemplate";

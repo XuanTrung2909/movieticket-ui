@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Carousel from '../../Components/Carousel/Carousel';
+import ShowMovie from '../../Components/ShowMovie/ShowMovie';
 import {getMovieByGroup} from './../../Redux/Actions/MovieAction';
 
-export default function Home(props) {
+export default function Home() {
 
     const {movieList} = useSelector(state => state.MovieReducer);
     const dispatch = useDispatch();
@@ -13,14 +14,14 @@ export default function Home(props) {
         dispatch(getMovieByGroup('GP01'));
     }, [])
 
-    
+    const movieListCarousel = movieList.filter((movieItem, index) => index < 3)
     return (
         <Fragment>
             <div className="carousel">
-                <Carousel movieList = {movieList}/>
+                <Carousel movieListCarousel = {movieListCarousel}/>
             </div>
-            <div className="movie">
-
+            <div className="show_movie">
+              <ShowMovie movieList={movieList} />
             </div>
             <div className="theatres">
 

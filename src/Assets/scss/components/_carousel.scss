@@ -1,5 +1,6 @@
 .carousel{
   margin-top: 6rem;
+  position: relative;
   .bg_img{
     height: 80rem;
     background-position: center;
@@ -37,6 +38,26 @@
     &:hover .overlay{
       display: flex;
     }
+  }
+  button{
+    position: absolute;
+    top: 40%;
+    svg{
+      font-size: $font-50;
+      color: $color-white;
+      @media screen and (max-width: $breakpoint-md) {
+        font-size: $font-40;
+      }
+      @media screen and (max-width: $breakpoint-sm) {
+        font-size: $font-20;
+      }
+    }
+  }
+  .carousel_prev{
+    left: 2%
+  }
+  .carousel_next{
+    right: 2%;
   }
 }
 @keyframes animationShow{
