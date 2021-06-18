@@ -20,11 +20,12 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { useState } from "react";
 import { useEffect } from "react";
 import { RESET_ERROR } from "../../Ulti/setting";
+import LoadingPage from "../../Components/LoadingPage/LoadingPage";
 
 export default function SignUp(props) {
   const [open, setOpen] = useState(false);
   const {errorLoadData, isSignUp} = useSelector(state => state.AuthReducer);
-
+  const {isLoading} = useSelector(state => state.LoadReducer);
   const dispatch = useDispatch();
 
 
@@ -190,6 +191,7 @@ export default function SignUp(props) {
           </FormControl>
         </form>
       </div>
+      {isLoading ? <LoadingPage /> : null}
     
       <Dialog
         open={open}

@@ -27,6 +27,22 @@
         font-size: $font-60;
       }
     }
+    .rating{
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      text-align: center;
+      background-color: $color-bg-rating;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      p{
+        font-size: $font-16;
+        color: $color-white;
+      }
+      .rt{
+        color: red;
+      }
+    }
   }
   .item_content{
     padding: 2rem 1rem;

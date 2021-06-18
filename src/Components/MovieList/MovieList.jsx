@@ -6,8 +6,12 @@ import { useDispatch } from "react-redux";
 import { OPEN_MODAL_PLAY_VIDEO } from "./../../Ulti/setting";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
-import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@material-ui/icons";
+import {
+  ArrowBackIosOutlined,
+  ArrowForwardIosOutlined,
+} from "@material-ui/icons";
 import { useRef } from "react";
+import { Rating } from "@material-ui/lab";
 
 export default function MovieList(props) {
   const { movieList } = props;
@@ -47,11 +51,10 @@ export default function MovieList(props) {
 
   const handleShowMovieNext = () => {
     showMovieRef.current.slickNext();
-  }
+  };
   const handleShowMoviePrev = () => {
     showMovieRef.current.slickPrev();
-  }
-
+  };
 
   const renderMovieList = () => {
     return movieList.map((movieItem, index) => {
@@ -71,10 +74,21 @@ export default function MovieList(props) {
                 }}
               />
             </div>
+            <div className="rating">
+              <p>{movieItem.danhGia}</p>
+              <Rating
+                name="half-rating-read"
+                defaultValue={movieItem.danhGia / 2}
+                precision={0.5}
+                readOnly
+                size='small'
+                className='rt'
+              />
+            </div>
           </div>
           <div className="item_content">
             <h2>{movieItem.tenPhim}</h2>
-            <Link to={`/chi-tiet-phim/${movieItem.maPhim}`} className='link'>
+            <Link to={`/chi-tiet-phim/${movieItem.maPhim}`} className="link">
               <Button fullWidth>Xem Chi Tiết</Button>
             </Link>
           </div>
@@ -84,13 +98,13 @@ export default function MovieList(props) {
   };
   return (
     <Fragment>
-      <Slider {...settings} ref={showMovieRef} >
+      <Slider {...settings} ref={showMovieRef}>
         {renderMovieList()}
       </Slider>
-      <Button className='show_movie_prev' onClick={handleShowMoviePrev} >
+      <Button className="show_movie_prev" onClick={handleShowMoviePrev}>
         <ArrowBackIosOutlined />
       </Button>
-      <Button className='show_movie_next' onClick={handleShowMovieNext} >
+      <Button className="show_movie_next" onClick={handleShowMovieNext}>
         <ArrowForwardIosOutlined />
       </Button>
     </Fragment>

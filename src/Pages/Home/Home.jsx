@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import Carousel from '../../Components/Carousel/Carousel';
 import ShowMovie from '../../Components/ShowMovie/ShowMovie';
 import {getMovieByGroup} from './../../Redux/Actions/MovieAction';
+import LoadingPage from './../../Components/LoadingPage/LoadingPage';
 
 export default function Home() {
 
     const {movieList} = useSelector(state => state.MovieReducer);
+    const {isLoading} = useSelector(state => state.LoadReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        document.title = 'Tix - Trang Chủ'
+        document.title = 'Tix - Trang Chủ';
         dispatch(getMovieByGroup('GP01'));
     }, [])
 
@@ -35,6 +37,9 @@ export default function Home() {
             <div className="footer">
 
             </div>
+
+            {isLoading ? <LoadingPage /> : null }
+            
         </Fragment>
     )
 }

@@ -26,10 +26,10 @@ import { RESET_ERROR } from "../../Ulti/setting";
 export default function Login(props) {
   const [open, setOpen] = useState(false);
  
-  const { isLoadingPage, errorLoadData, userName } = useSelector(
+  const { errorLoadData, userName } = useSelector(
     (state) => state.AuthReducer
   );
-
+  const {isLoading} = useSelector(state => state.LoadReducer);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ export default function Login(props) {
   }
 
   if(userName !== ''){
-    history.goBack();
+    history.push('/');
   }
 
 
@@ -149,7 +149,7 @@ export default function Login(props) {
           </FormControl>
         </form>
       </div>
-      {isLoadingPage ? <LoadingPage /> : null}
+      {isLoading ? <LoadingPage /> : null}
       <Dialog
         open={open}
         onClose={handleCloseAlert}

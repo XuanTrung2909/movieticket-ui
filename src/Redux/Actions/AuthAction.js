@@ -1,11 +1,11 @@
 import axios from "axios"
 
-import { FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, FETCH_SIGN_UP_SUCCESS, REQUEST_LOADING, USER_LOGIN } from "../../Ulti/setting"
+import { ACCESSTOKEN, FETCH_LOGIN_ERROR, FETCH_LOGIN_SUCCESS, FETCH_SIGN_UP_SUCCESS, HIDE_LOADING, SHOW_LOADING, USER_LOGIN } from "../../Ulti/setting"
 
 export const postLogin = (userLogin) => {
   return async (dispatch) => {
     dispatch({
-      type: REQUEST_LOADING
+      type: SHOW_LOADING
     })
     try {
       const result = await axios({
@@ -19,9 +19,11 @@ export const postLogin = (userLogin) => {
           userName: result.data.taiKhoan
       });
 
-      setTimeout(localStorage.setItem(USER_LOGIN, JSON.stringify(result.data)),30000);
+      setTimeout(localStorage.setItem(USER_LOGIN, JSON.stringify(result.data)),600000);
 
+      setTimeout(localStorage.setItem(ACCESSTOKEN, JSON.stringify(result.data.accessToken)),600000)
 
+      dispatch({type: HIDE_LOADING})
      
 
   } catch (error) {
@@ -30,6 +32,7 @@ export const postLogin = (userLogin) => {
         type: FETCH_LOGIN_ERROR,
         errorLoadData: error.response.data
       })
+      dispatch({type: HIDE_LOADING})
   }
 }
 }
@@ -37,7 +40,9 @@ export const postLogin = (userLogin) => {
 
 export const postSignUp = (userSignUp) => {
   return async(dispatch) => {
-    
+    dispatch({
+      type: SHOW_LOADING
+    })
     try {
       await axios({
         url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy`,
@@ -47,12 +52,14 @@ export const postSignUp = (userSignUp) => {
       dispatch({
         type: FETCH_SIGN_UP_SUCCESS
       })
+      dispatch({type: HIDE_LOADING})
       console.log(123);
     } catch (error) {
       dispatch({
         type: FETCH_LOGIN_ERROR,
         errorLoadData: error.response.data
-      })
+      });
+      dispatch({type: HIDE_LOADING})
     }
   }
 }
