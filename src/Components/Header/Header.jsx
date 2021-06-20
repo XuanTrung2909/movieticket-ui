@@ -65,10 +65,10 @@ export default function Header(props) {
               </List>
             ) : (
               <List className="header_sign">
-                <Link className="link" to="/login">
+                <Link className="link" to="/dang-nhap">
                   <Button>Đăng Nhập</Button>
                 </Link>
-                <Link className="link" to="/sign-up">
+                <Link className="link" to="/dang-ky">
                   <Button>Đăng Ký</Button>
                 </Link>
               </List>
@@ -104,10 +104,10 @@ export default function Header(props) {
             </List>
           ) : (
             <List className="sign_mobile">
-              <Link className="link" to="/login">
+              <Link className="link" to="/dang-nhap">
                 <Button>Đăng Nhập</Button>
               </Link>
-              <Link className="link" to="/sign-up">
+              <Link className="link" to="/dang-ky">
                 <Button>Đăng Ký</Button>
               </Link>
             </List>

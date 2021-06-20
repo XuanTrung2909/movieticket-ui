@@ -12,39 +12,38 @@ import * as Yup from "yup";
 import { postSignUp } from "../../Redux/Actions/AuthAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@material-ui/core";
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import { useState } from "react";
 import { useEffect } from "react";
 import { RESET_ERROR } from "../../Ulti/setting";
 import LoadingPage from "../../Components/LoadingPage/LoadingPage";
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 export default function SignUp(props) {
   const [open, setOpen] = useState(false);
-  const {errorLoadData, isSignUp} = useSelector(state => state.AuthReducer);
-  const {isLoading} = useSelector(state => state.LoadReducer);
+  const { errorLoadData, isSignUp } = useSelector((state) => state.AuthReducer);
+  const { isLoading } = useSelector((state) => state.LoadReducer);
   const dispatch = useDispatch();
-
 
   const handleCloseAlert = () => {
     setOpen(false);
     dispatch({
-      type: RESET_ERROR
-    })
-  }
+      type: RESET_ERROR,
+    });
+  };
   useEffect(() => {
-    document.title = 'Tix - Đăng Ký';
-  },[])
-  
+    document.title = "Tix - Đăng Ký";
+  }, []);
+
   useEffect(() => {
-    console.log(isSignUp);
-    if(errorLoadData !== null || isSignUp === true){
-      setOpen(true)
+    if (errorLoadData !== null || isSignUp === true) {
+      setOpen(true);
     }
-  },[errorLoadData, isSignUp])
+  }, [errorLoadData, isSignUp]);
 
   const formik = useFormik({
     initialValues: {
@@ -134,7 +133,7 @@ export default function SignUp(props) {
               className="input"
               fullWidth
               onChange={formik.handleChange}
-              onBlur= {formik.handleBlur}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
             />
             {formik.errors.email && formik.touched.email ? (
@@ -176,45 +175,57 @@ export default function SignUp(props) {
             />
           </FormControl>
           <FormControl fullWidth margin="normal">
-            <Button size="large" type="submit" onClick={() => {
-              console.log(isSignUp);
-              if(errorLoadData !== null || isSignUp === true){
-                setOpen(true);
-              }
-            }}>
+            <Button
+              size="large"
+              type="submit"
+              onClick={() => {
+                
+                if (errorLoadData !== null || isSignUp === true) {
+                  setOpen(true);
+                }
+              }}
+            >
               Đăng Nhập
             </Button>
             <p>
               Nếu bạn đã có tài khoản, hãy{" "}
-              <Link to="/login">đăng nhập tài khoản tại đây</Link>
+              <Link to="/dang-nhap">đăng nhập tài khoản tại đây</Link>
             </p>
           </FormControl>
         </form>
       </div>
       {isLoading ? <LoadingPage /> : null}
-    
+
       <Dialog
         open={open}
         onClose={handleCloseAlert}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        className='modal_alert'
+        className="modal_alert"
       >
-        <DialogTitle id="alert-dialog-title" className={isSignUp ? 'title_success' : 'title_error'}>
-          <ErrorOutlineIcon /> 
+        <DialogTitle
+          id="alert-dialog-title"
+          className={isSignUp ? "title_success" : "title_error"}
+        >
+          {isSignUp ? <CheckCircleOutlineIcon /> : <ErrorOutlineIcon />}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description" className='content'>
-            {errorLoadData}
+          <DialogContentText id="alert-dialog-description" className="content">
+            {isSignUp ? "Đăng Ký Tài Khoản Thành Công" : `${ errorLoadData }`}
           </DialogContentText>
         </DialogContent>
-        <DialogActions className='action'>
-          <Button onClick={handleCloseAlert} variant='outlined' className={isSignUp ? 'btn_success' : 'btn_error'}>
-            OK
-          </Button>
+        <DialogActions className="action">
+          <Link to={isSignUp ? '/dang-nhap' : '/dang-ky'} className='link'>
+            <Button
+              onClick={handleCloseAlert}
+              variant="outlined"
+              className={isSignUp ? "btn_success" : "btn_error"}
+            >
+              OK
+            </Button>
+          </Link>
         </DialogActions>
       </Dialog>
-    
     </div>
   );
 }

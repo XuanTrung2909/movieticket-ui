@@ -48,12 +48,10 @@ export const postSignUp = (userSignUp) => {
         url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy`,
         method: 'POST',
         data: userSignUp
-      })
-      dispatch({
-        type: FETCH_SIGN_UP_SUCCESS
-      })
-      dispatch({type: HIDE_LOADING})
-      console.log(123);
+      });
+      
+      dispatch({type: HIDE_LOADING});
+      dispatch({type: FETCH_SIGN_UP_SUCCESS});
     } catch (error) {
       dispatch({
         type: FETCH_LOGIN_ERROR,

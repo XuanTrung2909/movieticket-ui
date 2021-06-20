@@ -144,7 +144,7 @@ export default function Login(props) {
             </Button>
             <p>
               Nếu bạn chưa có tài khoản, hãy{" "}
-              <Link to="/sign-up" >đăng ký tài khoản tại đây</Link>
+              <Link to="/dang-ky" >đăng ký tài khoản tại đây</Link>
             </p>
           </FormControl>
         </form>

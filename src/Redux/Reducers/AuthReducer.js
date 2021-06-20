@@ -31,7 +31,6 @@ export const AuthReducer = (state = stateDefault, action) => {
     }
     case FETCH_SIGN_UP_SUCCESS: {
       state.isSignUp = true;
-      console.log(456);
       return {...state};
     }
   
