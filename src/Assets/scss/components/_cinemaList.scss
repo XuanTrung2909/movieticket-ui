@@ -1,12 +1,18 @@
 .cinema{
+  max-height: 70rem;
   .cinema_system_tabs{
     .cinema_system_tablist{
+      height: 70rem;
+      overflow: auto;
+      
+
       display: block;
       .cinema_system_tab{
         display: flex;
         margin: 2rem 0;
         opacity: 0.5;
         transition: all 0.5s;
+        
         button{
           display: block;
           margin: 0 auto;
@@ -16,19 +22,26 @@
             width: 50%;
             
           }
+          
         }
         
         &:hover{
           opacity: 1;
         }
       }
-      .hr{
-        width: 70%;
-        margin: 0 auto;
+      
+      .cinema_tab{
+        list-style: none;
+        padding: 2rem;
+        opacity: 0.5rem !important;
+        cursor: pointer;
       }
     }
   }
   .active{
     opacity: 1 !important;
+  }
+  .img_tab{
+    width: 100%;
   }
 }
