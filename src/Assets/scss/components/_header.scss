@@ -11,8 +11,10 @@
       }
     }
     .nav {
-      .link {
+      display: flex;
+      li {
         font-size: $font-16;
+        cursor: pointer;
         margin: 0 2rem;
         transition: all 0.5s;
         &:hover {
@@ -55,7 +57,7 @@
   .sign_mobile, .signed_mobile {
     display: flex;
     justify-content: space-around;
-    .link {
+    li {
       display: block;
       margin: 0 2rem;
       button {

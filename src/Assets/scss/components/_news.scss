@@ -1,0 +1,72 @@
+.news{
+  padding: 10rem 0;
+  .tabs{
+    .tabslist{
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 5rem 0;
+      font-size: $font-20;
+      @media screen and (max-width: $breakpoint-sm) {
+        font-size: $font-14;
+        
+      }
+      .tab{
+        padding: 0 3rem;
+        cursor: pointer;
+        transition: all 0.5s;
+        @media screen and (max-width: $breakpoint-sm) {
+          
+            padding: 0 1rem;
+          
+        }
+        &:hover{
+          letter-spacing: 0.2rem;
+          color: $color-primary;
+          font-weight: bold;
+        }
+      }
+    }
+    .tabpanel{
+      .img{
+        
+        img{
+          width: 100%;
+          border-radius: 1rem;
+        }
+      }
+      .content{
+        margin: 2rem 0;
+        a{
+          font-size: $font-12;
+          transition: all 0.5s;
+          &:hover{
+            color: $color-primary;
+          }
+        }
+        p{
+          font-size: 1.2rem;
+          margin-top: 1rem;
+        }
+      }
+      .item_small{
+        .img{
+          margin-bottom: 2rem;
+          img{
+            height: 6rem;
+          }
+        }
+        .content{
+          a{
+            font-size: $font-11;
+          }
+        }
+      }
+    }
+  }
+  .active{
+    letter-spacing: 0.2rem;
+    color: $color-primary;
+    font-weight: bold;
+  }
+}

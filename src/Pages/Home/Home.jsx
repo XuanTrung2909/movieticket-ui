@@ -6,6 +6,7 @@ import { getMovieByGroup } from "./../../Redux/Actions/MovieAction";
 import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
 import { getCinema } from "../../Redux/Actions/CinemaAction";
 import CinemaList from "../../Components/CinemaList/CinemaList";
+import News from "../../Components/News/News";
 
 
 export default function Home() {
@@ -31,16 +32,18 @@ export default function Home() {
       <div className="carousel">
         <Carousel movieListCarousel={movieListCarousel} />
       </div>
-      <div className="show_movie">
+      <div className="show_movie" id='show_movie'>
         <ShowMovie movieList={movieList} />
       </div>
-      <div className="cinema">
+      <div className="cinema" id='cinema'>
         <CinemaList
           cinemaList={cinemaList}
         />
       </div>
-      <div className="news"></div>
-      <div className="ads"></div>
+      <div className="news" id='news'>
+        <News />
+      </div>
+      <div className="ads" id='ads'></div>
       <div className="footer"></div>
 
       {isLoading ? <LoadingPage /> : null}

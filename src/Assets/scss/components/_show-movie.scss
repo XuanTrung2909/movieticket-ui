@@ -1,4 +1,5 @@
 .show_movie {
+  padding: 20rem 0;
   .show_movie_list {
     position: relative;
     .tab_title {
@@ -11,6 +12,11 @@
         @media screen and (max-width: $breakpoint-sm) {
           font-size: $font-14;
           padding: 2rem;
+        }
+        &:hover{
+          color: $color-primary;
+          letter-spacing: 0.2rem;
+          font-weight: bold;
         }
       }
       li.active{

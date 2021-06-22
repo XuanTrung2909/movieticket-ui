@@ -1,47 +1,96 @@
-.cinema{
+.cinema {
   max-height: 70rem;
-  .cinema_system_tabs{
-    .cinema_system_tablist{
-      height: 70rem;
+  
+  @media screen and (max-width: $breakpoint-sm) {
+    display: none;
+  }
+  .cinema_system_tabs {
+    
+    .cinema_system_tablist {
+      max-height: 60rem;
       overflow: auto;
-      
-
       display: block;
-      .cinema_system_tab{
+      overflow-x: hidden;
+      
+      .cinema_system_tab {
         display: flex;
         margin: 2rem 0;
         opacity: 0.5;
         transition: all 0.5s;
-        
-        button{
+
+        button {
           display: block;
           margin: 0 auto;
           width: 100%;
           background-color: transparent;
-          img{
+          img {
             width: 50%;
-            
           }
-          
         }
-        
-        &:hover{
+
+        &:hover {
           opacity: 1;
         }
       }
+    }
+    .cinema_system_tabpanel {
       
-      .cinema_tab{
-        list-style: none;
-        padding: 2rem;
-        opacity: 0.5rem !important;
-        cursor: pointer;
+      .cinema_tabs {
+        .cinema_tablist {
+          list-style: none;
+          max-height: 60rem;
+          overflow: auto;
+          overflow-x: hidden;
+          
+          .cinema_tab {
+            cursor: pointer;
+            padding: 1rem;
+            opacity: 0.5;
+            transition: all 0.5s;
+            &:hover{
+              opacity: 1;
+            }
+            img {
+              width: 100%;
+              border-radius: 50%;
+            }
+            p{
+              font-size: $font-12;
+              margin-top: 0.5rem;
+            }
+          }
+        }
+        .cinema_tabpanel {
+          max-height: 60rem;
+          overflow: auto;
+          overflow-x: hidden;
+          img {
+            width: 100%;
+            height: 4rem;
+          }
+          .show_time{
+            flex-wrap: wrap;
+            p{
+
+              padding: 1rem 2rem;
+              border-radius: 2rem;
+              background-color: $color-bg-time;
+              margin: 0.5rem;
+              color: $color-secondary;
+              font-size: $font-16;
+              svg{
+                color: $color-black;
+                margin-bottom: -0.5rem;
+                margin-right: 0.2rem;
+                font-size: $font-20;
+              }
+            }
+          }
+        }
       }
     }
   }
-  .active{
+  .active {
     opacity: 1 !important;
-  }
-  .img_tab{
-    width: 100%;
   }
 }
