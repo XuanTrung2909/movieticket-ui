@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Route } from 'react-router'
+import Footer from '../../Components/Footer/Footer'
 import Header from '../../Components/Header/Header'
 
 export default function UserTemplate(props) {
@@ -13,6 +14,7 @@ export default function UserTemplate(props) {
                     </Fragment>
                 )
             }} />
+            <Footer />
         </Fragment>
     )
 }

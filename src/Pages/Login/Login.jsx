@@ -52,7 +52,7 @@ export default function Login(props) {
   }
 
   if(userName !== ''){
-    history.push('/');
+    history.goBack();
   }
 
 

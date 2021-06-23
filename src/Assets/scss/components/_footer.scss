@@ -1,0 +1,62 @@
+.footer{
+  background-color: $color-bg-footer;
+  padding: 2rem 0;
+  h2{
+    color: $color-white;
+    font-size: $font-14;
+  }
+  .tix{
+    p{
+      color: gray;
+      &:hover{
+        color: $color-white;
+      }
+      font-size: $font-14;
+      margin: 1rem 0;
+      transition: all 0.5s;
+    }
+  }
+  .partner{
+    @media screen and (max-width: $breakpoint-sm) {
+      display: none;
+    }
+    h2{
+      margin-bottom: 1rem;
+    }
+    .icon{
+      img{
+        width: 100%;
+        border-radius: 50%;
+        background-color: white;
+      }
+    }
+  }
+  .app{
+    
+    img{
+      width: 3rem;
+      margin: 0 1rem;
+    }
+  }
+  hr{
+    margin: 4rem 0;
+    background-color: gray;
+  }
+  .info{
+    img{
+      width: 50%;
+    }
+    h2{
+      color: $color-white;
+    }
+    p{
+      color: gray;
+      font-size: $font-14;
+      span{
+        color: red;
+      }
+    }
+    
+
+  }
+}

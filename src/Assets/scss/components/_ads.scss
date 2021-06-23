@@ -1,0 +1,44 @@
+.ads{
+  background-image: url("https://cybersoft-movie-phutran.web.app/static/media/backapp.5de6f656.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 15rem 0;
+  .ads_text{
+    
+    .content{
+      color: $color-white;
+      @media screen and (max-width: $breakpoint-md) {
+        text-align: center;
+      }
+      h1{
+        margin-bottom: 5rem;
+        font-size: $font-40;
+      }
+      p{
+        font-size: $font-16;
+      }
+      button{
+        color: $color-white;
+        height: 4rem;
+        background-color: $color-primary;
+        margin: 3rem 0;
+        font-size: $font-14;
+        padding: 2rem;
+      }
+    }
+  }
+  .ads_img{
+    display: flex;
+    .slide{
+      width: 20rem;
+      height: 30rem;
+      margin: auto;
+      
+      img{
+        width: 100%;
+        border-radius: 1rem;
+      }
+    }
+  }
+}

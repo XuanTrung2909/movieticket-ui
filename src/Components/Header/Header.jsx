@@ -38,8 +38,8 @@ export default function Header(props) {
     return document.getElementById(id)?.scrollIntoView({behavior: "smooth", block: "start", inline:"start"})
   }
   const handlScrollIntoIdMobile = (id) => {
-    handlScrollIntoId(id)
-    setCheckMenu(false)
+    handlScrollIntoId(id);
+    setCheckMenu(false);
   }
   return (
     <div className="header">

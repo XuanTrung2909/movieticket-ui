@@ -7,6 +7,8 @@ import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
 import { getCinema } from "../../Redux/Actions/CinemaAction";
 import CinemaList from "../../Components/CinemaList/CinemaList";
 import News from "../../Components/News/News";
+import Ads from "../../Components/Ads/Ads";
+import Footer from "../../Components/Footer/Footer";
 
 
 export default function Home() {
@@ -43,8 +45,12 @@ export default function Home() {
       <div className="news" id='news'>
         <News />
       </div>
-      <div className="ads" id='ads'></div>
-      <div className="footer"></div>
+      <div className="ads" id='ads'>
+        <Ads />
+      </div>
+      <div className="footer">
+        <Footer />
+      </div>
 
       {isLoading ? <LoadingPage /> : null}
     </Fragment>

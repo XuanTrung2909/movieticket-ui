@@ -1,9 +1,10 @@
-import { CLOSE_MODAL_PLAY_VIDEO, GET_MOVIE_BY_GROUP, OPEN_MODAL_PLAY_VIDEO } from "../../Ulti/setting";
+import { CLOSE_MODAL_PLAY_VIDEO, FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, OPEN_MODAL_PLAY_VIDEO } from "../../Ulti/setting";
 
 const stateDefault = {
   movieList: [],
   isModalPlayVideo: false,
   linkTrailer: '',
+  movieDetail: {},
 
 }
 
@@ -22,7 +23,10 @@ export const MovieReducer = (state = stateDefault, action) => {
       state.isModalPlayVideo = true;
       return {...state};
     }
-  
+    case FETCH_MOVIE_DETAIL_SUCCESS: {
+      state.movieDetail = action.movieDetail
+      return {...state};
+    }
     default:
       return {...state};
   }
