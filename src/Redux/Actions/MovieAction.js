@@ -39,7 +39,7 @@ export const getMovieDetail = (maPhim) => {
         type: HIDE_LOADING
       })
     } catch (error) {
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
   }
 }

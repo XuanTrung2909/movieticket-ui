@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Divider, Grid, Hidden } from "@material-ui/core";
+import { Container, Divider, Grid } from "@material-ui/core";
 
 export default function Footer() {
   return (

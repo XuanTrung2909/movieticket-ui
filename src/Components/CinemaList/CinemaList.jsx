@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 export default function CinemaList(props) {
   const { cinemaList } = props;
   const renderCinemaSytem = () => {
-    return cinemaList.map((cinemaSystemItem, index) => {
+    return cinemaList?.map((cinemaSystemItem, index) => {
       return (
         <Fragment key={index}>
           <Tab className="cinema_system_tab" selectedClassName="active">
@@ -29,7 +29,7 @@ export default function CinemaList(props) {
     });
   };
   const renderCinemaGroup = () => {
-    return cinemaList.map((cinemaSystemItem, i) => {
+    return cinemaList?.map((cinemaSystemItem, i) => {
       return (
         <Fragment key={i}>
           <TabPanel className='cinema_system_tabpanel'>
@@ -51,7 +51,7 @@ export default function CinemaList(props) {
     });
   };
   const renderCinema = (arr) => {
-    return arr.map((cinemaItem, index) => {
+    return arr?.map((cinemaItem, index) => {
       return (
         <Fragment key={index}>
           <Tab className="cinema_tab" selectedClassName="active">
@@ -73,7 +73,7 @@ export default function CinemaList(props) {
     });
   };
   const renderCinemaContent = (arr) => {
-    return arr.map((arrItem, index) => {
+    return arr?.map((arrItem, index) => {
       return (
         <TabPanel key={index} className="cinema_tabpanel">
           {arrItem.danhSachPhim.map((phim, j) => {

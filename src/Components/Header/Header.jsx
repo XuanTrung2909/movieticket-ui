@@ -14,12 +14,12 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
 
 export default function Header(props) {
   const { userName } = useSelector((state) => state.AuthReducer);
-  const history = useHistory();
+  
 
   const [checkMenu, setCheckMenu] = useState(false);
   const handleOpenMenu = () => {

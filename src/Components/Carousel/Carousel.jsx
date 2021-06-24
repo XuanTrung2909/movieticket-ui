@@ -28,7 +28,7 @@ export default function Carousel(props) {
   }  
   
   const renderCarousel = () => {
-    return movieListCarousel.map((movieItem, index) => {
+    return movieListCarousel?.map((movieItem, index) => {
         return(
           <div key={index}>
             <div className='bg_img' style={{backgroundImage: `url(${movieItem.hinhAnh})`}}>

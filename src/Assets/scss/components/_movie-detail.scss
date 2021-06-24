@@ -1,0 +1,157 @@
+.movie_detail {
+  margin-top: 6.5rem;
+  .top {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // height: auto;
+    padding: 20rem 0;
+    position: relative;
+    @media screen and (max-width: $breakpoint-sm) {
+      padding: 5rem 0;
+    }
+    .overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #ffffff00, $color-bg-detail);
+      backdrop-filter: blur(0.5rem);
+    }
+    .infomation {
+      color: $color-white;
+      z-index: 1;
+      img {
+        width: 100%;
+        height: 30rem;
+      }
+      p {
+        font-size: $font-16;
+      }
+      h1 {
+        font-size: $font-20;
+        margin: 1rem 0;
+      }
+      button {
+        background-color: $color-primary;
+        color: $color-white;
+        margin-top: 2rem;
+        padding: 1rem 4rem;
+        font-size: $font-16;
+      }
+    }
+    .rating {
+      z-index: 2;
+      .circular {
+        max-width: 15rem;
+
+        display: block;
+        text-align: center;
+      }
+      .CircularProgressbar-text {
+        fill: $color-secondary;
+      }
+      .CircularProgressbar-path {
+        stroke: $color-secondary;
+      }
+      .rat {
+        color: red;
+        margin: 1rem 0;
+      }
+      p {
+        color: $color-white;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .bottom {
+    background-color: $color-bg-detail;
+    padding-bottom: 5rem;
+    .tabs {
+      .tablist {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5rem;
+        @media screen and (max-width: $breakpoint-sm) {
+          margin-bottom: 2rem;
+        }
+        .tab {
+          margin: 2rem;
+          font-size: $font-20;
+          transition: all 0.5s;
+          cursor: pointer;
+          color: $color-white;
+          @media screen and (max-width: $breakpoint-sm) {
+            font-size: $font-14;
+            margin: 1.3rem;
+          }
+          &:hover {
+            color: $color-primary;
+            font-weight: bold;
+            letter-spacing: 0.2rem;
+          }
+        }
+        .active {
+          color: $color-primary !important;
+          font-weight: bold;
+          letter-spacing: 0.2rem;
+        }
+      }
+      .showtime {
+        background-color: $color-white;
+        border-radius: 0.5rem;
+        min-height: 70rem;
+        @media screen and (max-width: $breakpoint-sm) {
+          min-height: 50rem;
+        }
+        .cinema_tabs {
+          .cinema_tablist {
+            .cinema_tab {
+              display: flex;
+              justify-content: center;
+              margin: 2rem 0;
+              opacity: 0.5;
+              cursor: pointer;
+              transition: all 0.5s;
+              img {
+                width: 30%;
+                @media screen and (max-width: $breakpoint-sm) {
+                  width: 80%;
+                }
+              }
+              &:hover {
+                opacity: 1;
+              }
+            }
+            .active {
+              opacity: 1 !important;
+            }
+          }
+          .cinema_tabpanel{
+            max-height: 70rem;
+            overflow: auto;
+            overflow-x: hidden;
+            .title{
+              img{
+                width: 100%;
+                @media screen and (min-width: $breakpoint-md) {
+                  width: 60%;
+                }
+              }
+            }
+            .content{
+              flex-wrap: wrap;
+              p{
+                padding: 1rem 2rem;
+                background-color: $color-bg-time;
+                margin: 0.5rem;
+                border-radius: 2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
