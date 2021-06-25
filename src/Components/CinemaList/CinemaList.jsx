@@ -9,6 +9,8 @@ import {
   AccordionDetails,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Link } from "react-router-dom";
+import { ACCESSTOKEN } from "../../Ulti/setting";
 
 export default function CinemaList(props) {
   const { cinemaList } = props;
@@ -96,7 +98,9 @@ export default function CinemaList(props) {
                   </AccordionSummary>
                   <AccordionDetails className='show_time'>
                     {phim.lstLichChieuTheoPhim.map((lichChieu, k) => {
-                      return <p key = {k}> <EventIcon /> {lichChieu.ngayChieuGioChieu.slice(-5)}</p>;
+                      return <Link key = {k} className='link' to={localStorage.getItem(ACCESSTOKEN) ? '/dat-ve' : '/dang-nhap'}>
+                        <Button> <EventIcon /> {lichChieu.ngayChieuGioChieu.slice(-5)}</Button>
+                      </Link>
                     })}
                   </AccordionDetails>
                 </Accordion>

@@ -14,12 +14,12 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
 
 export default function Header(props) {
   const { userName } = useSelector((state) => state.AuthReducer);
-  
+  const history = useHistory();
 
   const [checkMenu, setCheckMenu] = useState(false);
   const handleOpenMenu = () => {
@@ -34,13 +34,18 @@ export default function Header(props) {
     window.location.reload();
   };
   const handlScrollIntoId = (id) => {
-    
-    return document.getElementById(id)?.scrollIntoView({behavior: "smooth", block: "start", inline:"start"})
-  }
+    if (history.location.pathname !== "/") {
+      history.push(`/?scrollTo=homePage`);
+      history.location.key = id;
+    }
+    return document
+      .getElementById(id)
+      ?.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+  };
   const handlScrollIntoIdMobile = (id) => {
     handlScrollIntoId(id);
     setCheckMenu(false);
-  }
+  };
   return (
     <div className="header">
       <AppBar position="fixed" color="default">
@@ -55,10 +60,21 @@ export default function Header(props) {
           </div>
           <Hidden smDown>
             <List className="nav">
-              <li className="link" onClick={() => handlScrollIntoId("show_movie")}>Lịch Chiếu</li>
-              <li className="link" onClick={() => handlScrollIntoId("cinema")}>Cụm Rạp</li>
-              <li className="link" onClick={() => handlScrollIntoId("news")}>Tin Tức</li>
-              <li className="link" onClick={() => handlScrollIntoId("ads")}>Ứng Dụng</li>
+              <li
+                className="link"
+                onClick={() => handlScrollIntoId("show_movie")}
+              >
+                Lịch Chiếu
+              </li>
+              <li className="link" onClick={() => handlScrollIntoId("cinema")}>
+                Cụm Rạp
+              </li>
+              <li className="link" onClick={() => handlScrollIntoId("news")}>
+                Tin Tức
+              </li>
+              <li className="link" onClick={() => handlScrollIntoId("ads")}>
+                Ứng Dụng
+              </li>
             </List>
           </Hidden>
           <Hidden smDown>
@@ -125,10 +141,16 @@ export default function Header(props) {
         </List>
         <Divider />
         <List className="nav_mobile">
-          <li className="link" onClick={() => handlScrollIntoIdMobile("show_movie")}>
+          <li
+            className="link"
+            onClick={() => handlScrollIntoIdMobile("show_movie")}
+          >
             Lịch Chiếu
           </li>
-          <li className="link" onClick={() => handlScrollIntoIdMobile("cinema")}>
+          <li
+            className="link"
+            onClick={() => handlScrollIntoIdMobile("cinema")}
+          >
             Cụm Rạp
           </li>
           <li className="link" onClick={() => handlScrollIntoIdMobile("news")}>
