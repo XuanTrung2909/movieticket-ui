@@ -8,6 +8,7 @@ import { getCinema } from "../../Redux/Actions/CinemaAction";
 import CinemaList from "../../Components/CinemaList/CinemaList";
 import News from "../../Components/News/News";
 import Ads from "../../Components/Ads/Ads";
+import { SHOW_LOADING } from "../../Ulti/setting";
 
 
 
@@ -22,13 +23,19 @@ export default function Home() {
 
   useEffect(() => {
     document.title = "Tix - Trang Chủ";
+    dispatch({
+      type: SHOW_LOADING
+    })
     dispatch(getMovieByGroup("GP01"));
-  }, []);
-  useEffect(() => {
     dispatch(getCinema());
   }, []);
+  
 
   const movieListCarousel = movieList.filter((movieItem, index) => index < 3);
+
+  if(isLoading) {
+    return <LoadingPage />
+  }
   return (
     <Fragment>
       <div className="carousel">
@@ -48,8 +55,6 @@ export default function Home() {
       <div className="ads" id='ads'>
         <Ads />
       </div>
-
-      {isLoading ? <LoadingPage /> : null}
     </Fragment>
   );
 }

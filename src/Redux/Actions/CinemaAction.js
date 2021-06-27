@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_CINEMA } from "../../Ulti/setting"
+import { FETCH_CINEMA, HIDE_LOADING } from "../../Ulti/setting"
 
 export const getCinema = (idCinemaSystem) => {
   return async(dispatch) => {
@@ -11,6 +11,9 @@ export const getCinema = (idCinemaSystem) => {
       dispatch({
         type: FETCH_CINEMA,
         cinemaList: result.data
+      })
+      dispatch({
+        type: HIDE_LOADING
       })
     } catch (error) {
       console.log(error.response.data);

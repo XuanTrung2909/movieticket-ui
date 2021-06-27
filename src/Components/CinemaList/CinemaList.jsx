@@ -98,7 +98,7 @@ export default function CinemaList(props) {
                   </AccordionSummary>
                   <AccordionDetails className='show_time'>
                     {phim.lstLichChieuTheoPhim.map((lichChieu, k) => {
-                      return <Link key = {k} className='link' to={localStorage.getItem(ACCESSTOKEN) ? '/dat-ve' : '/dang-nhap'}>
+                      return <Link key = {k} className='link' to={localStorage.getItem(ACCESSTOKEN) ? `/dat-ve/${lichChieu.maLichChieu}` : '/dang-nhap'}>
                         <Button> <EventIcon /> {lichChieu.ngayChieuGioChieu.slice(-5)}</Button>
                       </Link>
                     })}

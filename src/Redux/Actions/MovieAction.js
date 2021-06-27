@@ -3,9 +3,6 @@ import { FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, HIDE_LOADING, SHOW_LOAD
 
 export const getMovieByGroup = (idGroup) => {
   return async (dispatch) => {
-    dispatch({
-      type: SHOW_LOADING
-    })
     try {
       const result = await axios({
         url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=${idGroup}`,
@@ -23,9 +20,7 @@ export const getMovieByGroup = (idGroup) => {
 };
 export const getMovieDetail = (maPhim) => {
   return async(dispatch) => {
-    dispatch({
-      type: SHOW_LOADING
-    })
+    
     try {
       const result = await axios({
         url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`,

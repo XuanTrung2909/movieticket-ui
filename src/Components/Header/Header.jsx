@@ -80,10 +80,15 @@ export default function Header(props) {
           <Hidden smDown>
             {userName.trim() !== "" ? (
               <List className="signed">
-                <Link to="/profile" className="link">
+                <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
                   <Chip
                     label={userName}
-                    avatar={<Avatar className="avatar">TIX</Avatar>}
+                    avatar={
+                      <Avatar
+                        className="avatar"
+                        src="https://i.pravatar.cc/150?u=trung.nx"
+                      ></Avatar>
+                    }
                     className="chip"
                   ></Chip>
                 </Link>
@@ -119,10 +124,15 @@ export default function Header(props) {
         <List className="sign_mobile">
           {userName.trim() !== "" ? (
             <List className="signed_mobile">
-              <Link to="/profile" className="link">
+              <Link to={`/thong-tin-tai-khoan:${userName}`} className="link">
                 <Chip
                   label={userName}
-                  avatar={<Avatar className="avatar">TIX</Avatar>}
+                  avatar={
+                    <Avatar
+                      className="avatar"
+                      src="https://i.pravatar.cc/150?u=trung.nx"
+                    ></Avatar>
+                  }
                   className="chip"
                 ></Chip>
               </Link>

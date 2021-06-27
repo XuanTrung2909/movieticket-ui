@@ -1,0 +1,124 @@
+.booking {
+  .left{
+    .header {
+      font-size: $font-16;
+      width: 100%;
+      padding: 1rem 2rem;
+      box-shadow:0 0 1rem 0 gray;
+      img{
+        width: 6rem;
+      }
+      
+      p {
+        font-weight: bold;
+      }
+      span {
+        color: gray;
+      }
+    }
+    .room {
+      margin-top: 2rem;
+      .screen {
+        display: flex;
+        img {
+          display: block;
+          margin: auto;
+          width: 100%;
+        }
+      }
+  
+      svg {
+        font-size: $font-30;
+        @media screen and (max-width: $breakpoint-sm) {
+          font-size: $font-14;
+        }
+      }
+  
+      .vip {
+        color: blue;
+      }
+      .normal {
+        color: gray;
+      }
+      .booked {
+        color: $color-primary;
+      }
+      .booking {
+        color: $color-secondary;
+      }
+      .note{
+        text-align: center;
+        p{
+          font-size: $font-16;
+        }
+      }
+      hr{
+        margin: 1rem 0;
+      }
+    }
+
+  }
+  .right{
+    padding: 0 5rem;
+    box-shadow: 0 0 1rem 0 gray;
+    
+    @media screen and (max-width: $breakpoint-md) {
+      padding: 0;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+      margin-top: 5rem;
+    }
+    hr{
+      margin: 2rem 0;
+    }
+    .signed{
+      padding: 2rem;
+      display: flex;
+      .chip{
+        margin: auto;
+        display: flex;
+        span{
+          font-size: $font-16;
+        }
+        
+      }
+    }
+    .info{
+      font-size: $font-14;
+      p{
+        margin: 1rem 0;
+      }
+    }
+    .table_booking{
+      .table_cell{
+        font-size: $font-16;
+      }
+      svg{
+        color: $color-primary;
+      }
+      
+    }
+    .table_footer{
+      
+      text-align: center;
+      margin-top: 10rem;
+      
+      svg{
+        color: $color-primary;
+        font-size: $font-16;
+      }
+      p{
+        font-size: $font-14;
+      }
+      button{
+        width: 100%;
+        background-color: green;
+        height: 6rem;
+        font-size: $font-20;
+        color: $color-white;
+        margin-top: 2rem;
+      }
+    }
+  }
+  
+}

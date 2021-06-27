@@ -19,7 +19,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
-import { ACCESSTOKEN, OPEN_MODAL_PLAY_VIDEO } from "../../Ulti/setting";
+import { ACCESSTOKEN, OPEN_MODAL_PLAY_VIDEO, SHOW_LOADING } from "../../Ulti/setting";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
@@ -29,6 +29,9 @@ export default function MovieDetail(props) {
   const dispatch = useDispatch();
   const maPhim = props.match.params.maPhim;
   useEffect(() => {
+    dispatch({
+      type: SHOW_LOADING
+    })
     dispatch(getMovieDetail(maPhim));
   }, []);
 
@@ -40,7 +43,6 @@ export default function MovieDetail(props) {
     });
   };
 
-  console.log(movieDetail);
 
   const renderCinemaSystem = () => {
     return movieDetail.heThongRapChieu?.map((cinemaSystem, i) => {
@@ -83,7 +85,7 @@ export default function MovieDetail(props) {
                         key={k}
                         to={
                           localStorage.getItem(ACCESSTOKEN)
-                            ? "/dat-ve"
+                            ? `/dat-ve/${lich.maLichChieu}`
                             : "/dang-nhap"
                         }
                         className="link"
@@ -297,6 +299,10 @@ export default function MovieDetail(props) {
     );
   };
 
+  if(isLoading){
+    return <LoadingPage />;
+  }
+
   return (
     <div className="movie_detail">
       <div
@@ -322,7 +328,7 @@ export default function MovieDetail(props) {
                   <img src={movieDetail.hinhAnh} alt={movieDetail.tenPhim} />
                 </Grid>
                 <Grid item xs={8}>
-                  <p>{movieDetail.ngayKhoiChieu}</p>
+                  <p>{movieDetail.ngayKhoiChieu?.slice(0, 10)}</p>
                   <h1>{movieDetail.tenPhim}</h1>
                   <p>100 phút - 10 IMDb - 2D/Digital</p>
                   <Button
@@ -388,8 +394,6 @@ export default function MovieDetail(props) {
           </Tabs>
         </Container>
       </div>
-
-      {isLoading ? <LoadingPage /> : null}
     </div>
   );
 }
