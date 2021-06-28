@@ -3,7 +3,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { getRoomTicket, postBookingTicket } from "../../Redux/Actions/TicketAction";
+import {
+  getRoomTicket,
+  postBookingTicket,
+} from "../../Redux/Actions/TicketAction";
 import {
   ACCESSTOKEN,
   ADD_TICKET_BOOKING,
@@ -27,6 +30,7 @@ import { useAlert } from "react-alert";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function BookingTiket(props) {
   const alert = useAlert();
@@ -49,8 +53,8 @@ export default function BookingTiket(props) {
   const tickets = {
     maLichChieu: maLichChieu,
     danhSaChVe: arrTicketBooking,
-    taiKhoanNguoiDung: userName.taiKhoan
-  }
+    taiKhoanNguoiDung: userName.taiKhoan,
+  };
 
   useEffect(() => {
     dispatch(getRoomTicket(maLichChieu));
@@ -198,13 +202,16 @@ export default function BookingTiket(props) {
         <Grid item sm={4} xs={12} className="right">
           <Hidden xsDown>
             <div className="signed">
-              <Link className="link" to={`/thong-tin-tai-khoan/${userName.taiKhoan}`} className="chip">
+              <Link
+                className="link"
+                to={`/thong-tin-tai-khoan/${userName.taiKhoan}`}
+                className="chip"
+              >
                 <Chip
                   label={userName.taiKhoan}
                   avatar={
                     <Avatar src="https://i.pravatar.cc/150?u=trung.nx"></Avatar>
                   }
-                  
                 ></Chip>
               </Link>
             </div>
@@ -246,9 +253,13 @@ export default function BookingTiket(props) {
             <p>
               Mã vé sẽ được gửi qua tin nhắn ZMS(tin nhắn Zalo) và email đã nhập
             </p>
-            <Button onClick={() => {
-              postBookingTicket(tickets);
-            }}>Đặt Vé</Button>
+            <Button
+              onClick={() => {
+                postBookingTicket(tickets);
+              }}
+            >
+              Đặt Vé
+            </Button>
           </div>
         </Grid>
       </Grid>

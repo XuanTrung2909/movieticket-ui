@@ -23,23 +23,24 @@ export const getRoomTicket = (maLichChieu) => {
 }
 
 export const postBookingTicket = (tickets) => {
-  const accessToken = localStorage.getItem(ACCESSTOKEN)
-  console.log(accessToken);
+  console.log(456);
   return async(dispatch) => {
-    console.log(accessToken);
-    // try {
-    //   await axios({
-    //     url: "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
-    //     method: 'POST',
-    //     data: tickets,
-    //     headers: {
-    //       Authorization: `Bearer ` + accessToken
-    //     }
-    //   });
-    //   alert('đặt vé thành công')
-    //   // dispatch({type: HIDE_LOADING})
-    // } catch (error) {
-    //   console.log(error.response.data);
-    // }
+    dispatch({
+      type: SHOW_LOADING
+    })
+    try {
+      await axios({
+        url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe',
+        method: 'POST',
+        data: tickets,
+        headers: {
+          Authorization: 'Beare ' + JSON.parse(localStorage.getItem(ACCESSTOKEN))
+        }
+      })
+      dispatch({type: HIDE_LOADING})
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
+

@@ -12,6 +12,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Modal from "./Components/Modal/Modal";
 import MovieDetail from "./Pages/MovieDetail/MovieDetail";
 import BookingTiket from "./Pages/BookingTicket/BookingTiket";
+import Profile from "./Pages/Profile/Profile";
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Switch>
           <Route path="/dang-nhap" exact component={Login} />
           <Route path="/dang-ky" exact component={SignUp} />
+          <Route path='/thong-tin-tai-khoan/:taiKhoan' exact component={Profile} />
           <UserTemplate path='/chi-tiet-phim/:maPhim' exact component={MovieDetail} />
           <Route path='/dat-ve/:maLichChieu' exact component={BookingTiket} />
           <UserTemplate path="/" exact component={Home} />
