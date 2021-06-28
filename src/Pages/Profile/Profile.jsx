@@ -7,7 +7,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 export default function Profile() {
   return (
     <div className='profile'>
-        <AppBar color = 'default'>
+        <AppBar color = 'default' clas>
           <Grid container justify='space-between' alignItems='center'>
             <Grid item className='logo'>
               <Link to='/'>
