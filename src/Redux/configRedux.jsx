@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import reduxThunk from 'redux-thunk';
+import { AccountReducer } from "./Reducers/AccountReducer";
 import { AuthReducer } from "./Reducers/AuthReducer";
 import { CinemaReducer } from "./Reducers/CinemaReducer";
 import { LoadReducer } from "./Reducers/LoadReducer";
@@ -12,6 +13,8 @@ const rootReducer = combineReducers({
   LoadReducer: LoadReducer,
   CinemaReducer: CinemaReducer,
   TicketReducer: TicketReducer,
+  AccountReducer: AccountReducer,
+  
 });
 
 export const store= createStore(rootReducer, applyMiddleware(reduxThunk))

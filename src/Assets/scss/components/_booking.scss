@@ -123,3 +123,25 @@
   }
   
 }
+.dialog_ticket{
+  text-align: center;
+  
+  svg{
+    color: $color-secondary;
+    font-size: $font-40;
+  }
+  p{
+    font-size: $font-16;
+    min-width: 30rem;
+    margin: 2rem 0;
+  }
+  button{
+    min-width: 10rem;
+    font-size: $font-20;
+    &:hover{
+      background-color: $color-secondary;
+      
+    }
+  }
+
+}

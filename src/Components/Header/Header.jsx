@@ -124,7 +124,7 @@ export default function Header(props) {
         <List className="sign_mobile">
           {userName.trim() !== "" ? (
             <List className="signed_mobile">
-              <Link to={`/thong-tin-tai-khoan:${userName}`} className="link">
+              <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
                 <Chip
                   label={userName}
                   avatar={

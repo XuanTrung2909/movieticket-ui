@@ -13,7 +13,7 @@ export default function Ads() {
   };
   return (
     <Container maxWidth='lg'>
-      <Grid container spacing={5}>
+      <Grid container>
         <Grid item sm={6} xs={12} className='ads_text'>
           <div className="content">
             <h1>Ứng dụng tiện lợi dành cho người yêu điện ảnh</h1>

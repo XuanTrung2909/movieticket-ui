@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ACCESSTOKEN, FETCH_ROOM_TICKET_SUCCESS, HIDE_LOADING, POST_TICKET_SUCCESS, SHOW_LOADING } from "../../Ulti/setting"
+import { ACCESSTOKEN, FETCH_ROOM_TICKET_SUCCESS, HIDE_LOADING, POST_TICKET_SUCCESS, RESET_ARR_TICKET_BOOKING, SHOW_LOADING } from "../../Ulti/setting"
 
 
 export const getRoomTicket = (maLichChieu) => {
@@ -23,7 +23,7 @@ export const getRoomTicket = (maLichChieu) => {
 }
 
 export const postBookingTicket = (tickets) => {
-  console.log(456);
+  
   return async(dispatch) => {
     dispatch({
       type: SHOW_LOADING
@@ -34,12 +34,15 @@ export const postBookingTicket = (tickets) => {
         method: 'POST',
         data: tickets,
         headers: {
-          Authorization: 'Beare ' + JSON.parse(localStorage.getItem(ACCESSTOKEN))
-        }
+          Authorization: `Bearer ` + JSON.parse(localStorage.getItem(ACCESSTOKEN)),
+      }
+      })
+      dispatch({
+        type: POST_TICKET_SUCCESS
       })
       dispatch({type: HIDE_LOADING})
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   }
 }

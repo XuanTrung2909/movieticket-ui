@@ -1,9 +1,9 @@
-import { ADD_TICKET_BOOKING, DELETE_TICKET_BOOKING, FETCH_ROOM_TICKET_SUCCESS } from "../../Ulti/setting";
+import { ADD_TICKET_BOOKING, DELETE_TICKET_BOOKING, FETCH_ROOM_TICKET_SUCCESS, POST_TICKET_SUCCESS, RESET_ARR_TICKET_BOOKING } from "../../Ulti/setting";
 
 const stateDefault = {
   roomTicket: {},
   arrTicketBooking: [],
-
+  isBookTicket: false,
 }
 
 export const TicketReducer = (state = stateDefault, action) => {
@@ -26,6 +26,15 @@ export const TicketReducer = (state = stateDefault, action) => {
       const index = action.i;
       arr.splice(index, 1);
       state.arrTicketBooking = arr;
+      return {...state};
+    }
+    case RESET_ARR_TICKET_BOOKING: {
+      state.arrTicketBooking = [];
+      state.isBookTicket = false;
+      return {...state};
+    }
+    case POST_TICKET_SUCCESS: {
+      state.isBookTicket= true;
       return {...state};
     }
   

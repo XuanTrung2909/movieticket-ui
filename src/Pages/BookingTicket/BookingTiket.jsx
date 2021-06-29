@@ -11,6 +11,7 @@ import {
   ACCESSTOKEN,
   ADD_TICKET_BOOKING,
   DELETE_TICKET_BOOKING,
+  RESET_ARR_TICKET_BOOKING,
   SHOW_LOADING,
   USER_LOGIN,
 } from "./../../Ulti/setting";
@@ -31,11 +32,16 @@ import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Dialog } from "@material-ui/core";
+import { DialogTitle } from "@material-ui/core";
+import { DialogContent } from "@material-ui/core";
+import { DialogActions } from "@material-ui/core";
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 export default function BookingTiket(props) {
   const alert = useAlert();
   const history = useHistory();
-  const { roomTicket, arrTicketBooking } = useSelector(
+  const { roomTicket, arrTicketBooking, isBookTicket } = useSelector(
     (state) => state.TicketReducer
   );
   const { isLoading } = useSelector((state) => state.LoadReducer);
@@ -58,7 +64,7 @@ export default function BookingTiket(props) {
 
   useEffect(() => {
     dispatch(getRoomTicket(maLichChieu));
-  }, [arrTicketBooking]);
+  }, [arrTicketBooking, isBookTicket]);
 
   if (!localStorage.getItem(ACCESSTOKEN)) {
     history.push("/");
@@ -139,6 +145,10 @@ export default function BookingTiket(props) {
       );
     });
   };
+
+  const handleClose = () => {
+    dispatch({type: RESET_ARR_TICKET_BOOKING});
+  }
 
   if (isLoading) {
     return <LoadingPage />;
@@ -255,7 +265,7 @@ export default function BookingTiket(props) {
             </p>
             <Button
               onClick={() => {
-                postBookingTicket(tickets);
+                dispatch(postBookingTicket(tickets));
               }}
             >
               Đặt Vé
@@ -263,6 +273,17 @@ export default function BookingTiket(props) {
           </div>
         </Grid>
       </Grid>
+      <Dialog open={isBookTicket} onClose={handleClose} className='dialog_ticket'>
+        <DialogTitle>
+          <CheckCircleOutlineIcon />
+        </DialogTitle>
+        <DialogContent>
+          <p>Đã đăng ký thành công</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>OK</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

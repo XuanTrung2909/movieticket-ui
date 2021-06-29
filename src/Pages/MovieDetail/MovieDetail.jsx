@@ -107,7 +107,7 @@ export default function MovieDetail(props) {
   };
   const renderInfo = () => {
     return (
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item sm={6} xs={12} className="left">
           <Grid container spacing={2}>
             <Grid item xs={4}>
@@ -125,7 +125,7 @@ export default function MovieDetail(props) {
               <p>Đạo Diễn 1</p>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={4}>
               <p>Diễn Viên</p>
             </Grid>
@@ -133,7 +133,7 @@ export default function MovieDetail(props) {
               <p>Diễn Viên 1, Diễn Viên 2, Diễn Viên 3</p>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={4}>
               <p>Thể Loại</p>
             </Grid>
@@ -141,7 +141,7 @@ export default function MovieDetail(props) {
               <p>Hài, Khoa Học Viễn Tưởng</p>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={4}>
               <p>Định Dạng</p>
             </Grid>
@@ -149,7 +149,7 @@ export default function MovieDetail(props) {
               <p>2D/Digital</p>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={4}>
               <p>Quốc Gia</p>
             </Grid>
@@ -169,7 +169,7 @@ export default function MovieDetail(props) {
     return (
       <div>
         <Button fullWidth>
-          <Grid container spacing={2} justify="space-between">
+          <Grid container justify="space-between">
             <Grid item>
               <p>
                 <AccountCircleIcon /> Bạn nghĩ gì về phim này?
@@ -311,10 +311,10 @@ export default function MovieDetail(props) {
       >
         <div className="overlay"></div>
         <Container maxWidth="lg">
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item sm={9} xs={12} className="infomation">
-              <Grid container spacing={5}>
-                <Grid item xs={4} className="img">
+              <Grid container spacing={3}>
+                <Grid item xs={4} sm={3} className="img">
                   <div className="overlay_img">
                     <PlayCircleOutlineIcon
                       onClick={() => {
@@ -327,7 +327,7 @@ export default function MovieDetail(props) {
                   </div>
                   <img src={movieDetail.hinhAnh} alt={movieDetail.tenPhim} />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={8} sm={9}>
                   <p>{movieDetail.ngayKhoiChieu?.slice(0, 10)}</p>
                   <h1>{movieDetail.tenPhim}</h1>
                   <p>100 phút - 10 IMDb - 2D/Digital</p>

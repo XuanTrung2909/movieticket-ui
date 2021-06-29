@@ -1,11 +1,138 @@
-.profile{
-  .header{
-    padding: 0 2rem;
-    .logo{
-      img{
-        width: 6rem;
+.profile {
+  .content {
+    padding: 7rem 0;
+    position: relative;
+    height: 100rem;
+    .tabs {
+      .left {
+        padding: 5rem 0;
+        height: 100%;
+        @media screen and (max-width: $breakpoint-sm) {
+          position: absolute;
+          left: 0;
+          top: 6rem;
+          background-color: $color-white;
+          display: none;
+        }
+
+        .account {
+          text-align: center;
+          .avatar {
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto;
+          }
+          h3 {
+            font-size: $font-14;
+          }
+          p {
+            font-size: $font-12;
+          }
+        }
+        .tablist {
+          margin-top: 3rem;
+          text-align: center;
+          h2 {
+            font-size: $font-20;
+            color: $color-primary;
+            svg {
+              font-size: $font-30;
+              margin: 0 0.5rem -0.7rem 0;
+            }
+          }
+          .tab {
+            cursor: pointer;
+            transition: all 0.5s;
+            button {
+              padding: 2rem 0;
+              font-size: $font-14;
+              text-transform: unset;
+              svg {
+                margin-right: 0.5rem;
+                font-size: $font-20;
+              }
+            }
+          }
+          .active {
+            background-color: $color-primary;
+            button {
+              color: $color-white;
+            }
+          }
+        }
+      }
+      .right {
+        padding: 5rem 0;
+        
+        .tabpanel_info {
+          box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+            rgba(17, 17, 26, 0.1) 0px 8px 24px,
+            rgba(17, 17, 26, 0.1) 0px 16px 48px;
+            border-radius: 0.5rem;
+            padding: 0 5rem;
+            @media screen and (max-width: $breakpoint-sm) {
+              padding: 0;
+            }
+          hr {
+            margin: 1rem 0;
+          }
+          svg {
+            font-size: $font-50;
+            color: $color-primary;
+          }
+          h1{
+            padding: 1rem;
+          }
+          h3 {
+            font-size: $font-14;
+          }
+          button {
+            font-size: $font-14;
+            text-transform: unset;
+            border-color: $color-primary;
+            color: $color-primary;
+            border-radius: 2rem;
+            margin: 5rem 0;
+          }
+        }
+        .tabpanel_ticket {
+          max-height: 70rem;
+          overflow: auto;
+
+          .table {
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+              rgba(0, 0, 0, 0.12) 0px -12px 30px,
+              rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+              rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            
+
+            .table_head {
+              background-color: $color-primary;
+              .table_row {
+                .table_cell {
+                  color: white;
+                  font-size: $font-16;
+                  text-align: center;
+                }
+              }
+            }
+            .table_body {
+              .table_cell {
+                font-size: $font-14;
+                text-align: center;
+                p {
+                  background-color: $color-primary;
+                  border-radius: 0.5rem;
+                  color: $color-white;
+                  margin: 0.2rem;
+                  display: inline-block;
+                  padding: 0.2rem 1rem;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
-  
 }

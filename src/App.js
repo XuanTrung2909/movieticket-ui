@@ -25,7 +25,7 @@ function App() {
         <Switch>
           <Route path="/dang-nhap" exact component={Login} />
           <Route path="/dang-ky" exact component={SignUp} />
-          <Route path='/thong-tin-tai-khoan/:taiKhoan' exact component={Profile} />
+          <UserTemplate path='/thong-tin-tai-khoan/:taiKhoan' exact component={Profile} />
           <UserTemplate path='/chi-tiet-phim/:maPhim' exact component={MovieDetail} />
           <Route path='/dat-ve/:maLichChieu' exact component={BookingTiket} />
           <UserTemplate path="/" exact component={Home} />
