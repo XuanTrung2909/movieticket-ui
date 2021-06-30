@@ -31,6 +31,7 @@ export default function Header(props) {
   const handleDeleteUserCurrent = () => {
     localStorage.removeItem(USER_LOGIN);
     localStorage.removeItem(ACCESSTOKEN);
+    history.push('/')
     window.location.reload();
   };
   const handlScrollIntoId = (id) => {

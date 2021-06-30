@@ -23,8 +23,8 @@ export const postLogin = (userLogin) => {
 
       localStorage.setItem(ACCESSTOKEN, JSON.stringify(result.data.accessToken))
 
-      setTimeout(localStorage.removeItem(USER_LOGIN), 1800000);
-      setTimeout(localStorage.removeItem(ACCESSTOKEN), 1800000);
+      // setTimeout(localStorage.removeItem(USER_LOGIN), 1800000);
+      // setTimeout(localStorage.removeItem(ACCESSTOKEN), 1800000);
 
       dispatch({type: HIDE_LOADING})
      

@@ -132,6 +132,57 @@
             }
           }
         }
+        .tabpanel_modify{
+          box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+            rgba(17, 17, 26, 0.1) 0px 8px 24px,
+            rgba(17, 17, 26, 0.1) 0px 16px 48px;
+            border-radius: 0.5rem;
+            padding: 0 5rem;
+            @media screen and (max-width: $breakpoint-sm) {
+              padding: 0;
+            }
+          hr{
+            margin: 1rem 0;
+          }
+          h1{
+            padding: 1rem 0;
+            font-size: $font-20;
+          }
+          .form{
+            .form_control{
+              padding: 2rem 0;
+              
+              .input_label{
+                font-size: $font-14;
+                
+              }
+              .input{
+                font-size: $font-14;
+              }
+              .input::after{
+                border-bottom: 0.2rem solid $color-primary;
+              }
+              .Mui-focused{
+                color: $color-primary;
+              }
+              
+            }
+            div{
+              display: flex;
+              justify-content: center;
+              button{
+                min-width: 15rem;
+                height: 5rem;
+                margin: 5rem 0;
+                display: block;
+                background-color: $color-primary;
+                color: $color-white;
+                font-size: $font-14;
+              }
+            }
+            
+          }
+        }
       }
     }
   }

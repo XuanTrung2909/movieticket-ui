@@ -6,7 +6,7 @@ import {
   Input,
   FormHelperText,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postSignUp } from "../../Redux/Actions/AuthAction";
@@ -19,7 +19,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import { useState } from "react";
 import { useEffect } from "react";
-import { RESET_ERROR } from "../../Ulti/setting";
+import { ACCESSTOKEN, RESET_ERROR } from "../../Ulti/setting";
 import LoadingPage from "../../Components/LoadingPage/LoadingPage";
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
@@ -28,6 +28,7 @@ export default function SignUp(props) {
   const { errorLoadData, isSignUp } = useSelector((state) => state.AuthReducer);
   const { isLoading } = useSelector((state) => state.LoadReducer);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const handleCloseAlert = () => {
     setOpen(false);
@@ -35,6 +36,9 @@ export default function SignUp(props) {
       type: RESET_ERROR,
     });
   };
+  if(localStorage.getItem(ACCESSTOKEN)){
+    history.push('/')
+  }
   useEffect(() => {
     document.title = "Tix - Đăng Ký";
   }, []);

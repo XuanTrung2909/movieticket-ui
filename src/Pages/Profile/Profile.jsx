@@ -1,39 +1,44 @@
 import React from "react";
 import {
-  AppBar,
   Grid,
-  IconButton,
   Avatar,
   Table,
   TableHead,
   TableRow,
   TableCell,
   TableBody,
+  FormControl,
+  InputLabel,
+  Input,
+  TextField,
 } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Hidden } from "@material-ui/core";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import SettingsIcon from "@material-ui/icons/Settings";
+
 import { Divider } from "@material-ui/core";
 import DnsIcon from "@material-ui/icons/Dns";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { postInfoAccount } from "../../Redux/Actions/AccountAction";
-import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
+import {
+  postInfoAccount,
+  putInfoAccount,
+} from "../../Redux/Actions/AccountAction";
+import { ACCESSTOKEN, SHOW_LOADING, USER_LOGIN } from "../../Ulti/setting";
 import { Container } from "@material-ui/core";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import { Email, Lock, PhoneIphone } from "@material-ui/icons";
+import { Email, Lock, PhoneIphone, Settings } from "@material-ui/icons";
+import { useFormik } from "formik";
 
 export default function Profile() {
   const account = JSON.parse(localStorage.getItem(USER_LOGIN));
   const user = {
-    taiKhoan: account.taiKhoan,
+    taiKhoan: account?.taiKhoan,
   };
   const { infoAccount } = useSelector((state) => state.AccountReducer);
   const dispatch = useDispatch();
@@ -41,16 +46,19 @@ export default function Profile() {
   if (!localStorage.getItem(ACCESSTOKEN)) {
     history.push("/dang-nhap");
   }
+
   useEffect(() => {
+    dispatch({
+      type: SHOW_LOADING,
+    });
     dispatch(postInfoAccount(user));
   }, []);
-  console.log(infoAccount);
 
   const renderTicketList = () => {
     return infoAccount.thongTinDatVe?.map((ticket, i) => {
       return (
         <TableRow key={i} className="table_row">
-          <TableCell className='table_cell'>{i + 1}</TableCell>
+          <TableCell className="table_cell">{i + 1}</TableCell>
           <TableCell className="table_cell">{ticket.tenPhim}</TableCell>
           <Hidden xsDown>
             <TableCell className="table_cell">{ticket.maVe}</TableCell>
@@ -70,6 +78,21 @@ export default function Profile() {
       );
     });
   };
+
+  const formik = useFormik({
+    initialValues: {
+      taiKhoan: '',
+      matKhau: '',
+      email: '',
+      hoTen: '',
+      soDt: '',
+      maNhom: 'GP01',
+      maLoaiNguoiDung: 'KhachHang'
+    },
+    onSubmit: (values) => {
+      console.log(values.taiKhoan);
+    },
+  });
 
   return (
     <div className="profile">
@@ -95,9 +118,15 @@ export default function Profile() {
                     <ContactMailIcon /> Thông Tin Cá Nhân
                   </Button>
                 </Tab>
+
                 <Tab className="tab" selectedClassName="active">
                   <Button fullWidth>
                     <ShoppingCartIcon /> Danh Sách Vé Đã Đặt
+                  </Button>
+                </Tab>
+                <Tab className="tab" selectedClassName="active">
+                  <Button fullWidth>
+                    <Settings /> Chỉnh Sửa Thông Tin
                   </Button>
                 </Tab>
               </TabList>
@@ -152,21 +181,15 @@ export default function Profile() {
                     </Grid>
                   </Grid>
                   <Divider />
-                  <Grid container justify="center">
-                    <Button variant="outlined">
-                      Thay đổi thông tin cá nhân
-                    </Button>
-                  </Grid>
                 </TabPanel>
               </Container>
+
               <TabPanel className="tabpanel_ticket">
                 <Container maxWidth="lg">
                   <Table className="table">
                     <TableHead className="table_head">
                       <TableRow className="table_row">
-                        <TableCell className='table_cell'>
-                          STT
-                        </TableCell>
+                        <TableCell className="table_cell">STT</TableCell>
                         <TableCell className="table_cell">Tên Phim</TableCell>
                         <Hidden xsDown>
                           <TableCell className="table_cell">Mã Vé</TableCell>
@@ -186,6 +209,72 @@ export default function Profile() {
                   </Table>
                 </Container>
               </TabPanel>
+              <Container maxWidth="md">
+                <TabPanel className="tabpanel_modify">
+                  <h1>Chỉnh sửa Thông Tin</h1>
+                  <Divider />
+                  <form className="form" onSubmit={formik.handleSubmit}>
+                    <FormControl className="form_control" fullWidth disabled>
+                      <InputLabel className="input_label">
+                        {infoAccount.taiKhoan}
+                      </InputLabel>
+                      <Input className="input" />
+                    </FormControl>
+                    <FormControl className="form_control" fullWidth>
+                      <InputLabel className="input_label">Mật Khẩu</InputLabel>
+                      <Input
+                        className="input"
+                        type="password"
+                        name="matKhau"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.matKhau}
+                      />
+                    </FormControl>
+                    <FormControl className="form_control" fullWidth>
+                      <InputLabel className="input_label">
+                        Email
+                      </InputLabel>
+                      <Input
+                        className="input"
+                        type="email"
+                        name="email"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                        
+                      />
+                    </FormControl>
+                    <FormControl className="form_control" fullWidth>
+                      <InputLabel className="input_label">
+                        Họ Tên
+                      </InputLabel>
+                      <Input
+                        className="input"
+                        name="hoTen"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.hoTen}
+                      />
+                    </FormControl>
+                    <FormControl className="form_control" fullWidth>
+                      <InputLabel className="input_label">
+                        Số Điện Thoại
+                      </InputLabel>
+                      <Input
+                        className="input"
+                        name="soDT"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.soDT}
+                      />
+                    </FormControl>
+                    <FormControl fullWidth className='form_control'>
+                      <Button type='submit'>Thay đổi</Button>
+                    </FormControl>
+                  </form>
+                </TabPanel>
+              </Container>
             </Grid>
           </Grid>
         </Tabs>

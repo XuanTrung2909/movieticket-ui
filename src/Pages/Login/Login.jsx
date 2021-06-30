@@ -21,7 +21,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { useState } from "react";
 import { useEffect } from "react";
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import { RESET_ERROR } from "../../Ulti/setting";
+import { ACCESSTOKEN, RESET_ERROR } from "../../Ulti/setting";
 
 export default function Login(props) {
   const [open, setOpen] = useState(false);
@@ -54,7 +54,9 @@ export default function Login(props) {
   if(userName !== ''){
     history.goBack();
   }
-
+  if(localStorage.getItem(ACCESSTOKEN)){
+    history.push('/')
+  }
 
   useEffect(() => {
     if(errorLoadData !== null){
@@ -74,6 +76,7 @@ export default function Login(props) {
     onSubmit: (values) => {
       const action = postLogin(values);
       dispatch(action);
+      
     },
   });
 
