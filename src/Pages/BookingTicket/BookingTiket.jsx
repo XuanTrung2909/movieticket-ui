@@ -30,8 +30,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { useAlert } from "react-alert";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
 import { Dialog } from "@material-ui/core";
 import { DialogTitle } from "@material-ui/core";
 import { DialogContent } from "@material-ui/core";
@@ -66,9 +65,7 @@ export default function BookingTiket(props) {
     dispatch(getRoomTicket(maLichChieu));
   }, [arrTicketBooking, isBookTicket]);
 
-  if (!localStorage.getItem(ACCESSTOKEN)) {
-    history.push("/");
-  }
+  
 
   const renderSeat = () => {
     let classSeat = "";
@@ -152,6 +149,9 @@ export default function BookingTiket(props) {
 
   if (isLoading) {
     return <LoadingPage />;
+  }
+  if (!localStorage.getItem(ACCESSTOKEN)) {
+    return <Redirect to='/dang-nhap' />
   }
 
   return (
@@ -273,12 +273,12 @@ export default function BookingTiket(props) {
           </div>
         </Grid>
       </Grid>
-      <Dialog open={isBookTicket} onClose={handleClose} className='dialog_ticket'>
-        <DialogTitle>
-          <CheckCircleOutlineIcon />
+      <Dialog open={isBookTicket} onClose={handleClose} className='modal_alert'>
+        <DialogTitle className={isBookTicket ? "title_success" : "title_error"}>
+        {isBookTicket ? <CheckCircleOutlineIcon /> : <ErrorOutlineIcon />}
         </DialogTitle>
         <DialogContent>
-          <p>Đã đăng ký thành công</p>
+          {isBookTicket ? <p>Đã đăng ký thành công</p> : <p>Đặt vé Thành Công</p>}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>OK</Button>

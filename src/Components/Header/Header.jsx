@@ -31,7 +31,7 @@ export default function Header(props) {
   const handleDeleteUserCurrent = () => {
     localStorage.removeItem(USER_LOGIN);
     localStorage.removeItem(ACCESSTOKEN);
-    history.push('/')
+    history.push("/");
     window.location.reload();
   };
   const handlScrollIntoId = (id) => {
@@ -82,16 +82,18 @@ export default function Header(props) {
             {userName.trim() !== "" ? (
               <List className="signed">
                 <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
-                  <Chip
-                    label={userName}
-                    avatar={
-                      <Avatar
-                        className="avatar"
-                        src="https://i.pravatar.cc/150?u=trung.nx"
-                      ></Avatar>
-                    }
-                    className="chip"
-                  ></Chip>
+                  <Button>
+                    <Chip
+                      label={userName}
+                      avatar={
+                        <Avatar
+                          className="avatar"
+                          src="https://i.pravatar.cc/150?u=trung.nx"
+                        ></Avatar>
+                      }
+                      className="chip"
+                    ></Chip>
+                  </Button>
                 </Link>
                 <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
               </List>
@@ -126,16 +128,18 @@ export default function Header(props) {
           {userName.trim() !== "" ? (
             <List className="signed_mobile">
               <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
-                <Chip
-                  label={userName}
-                  avatar={
-                    <Avatar
-                      className="avatar"
-                      src="https://i.pravatar.cc/150?u=trung.nx"
-                    ></Avatar>
-                  }
-                  className="chip"
-                ></Chip>
+                <Button>
+                  <Chip
+                    label={userName}
+                    avatar={
+                      <Avatar
+                        className="avatar"
+                        src="https://i.pravatar.cc/150?u=trung.nx"
+                      ></Avatar>
+                    }
+                    className="chip"
+                  ></Chip>
+                </Button>
               </Link>
               <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
             </List>

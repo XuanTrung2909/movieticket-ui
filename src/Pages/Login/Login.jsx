@@ -5,7 +5,7 @@ import {
   Input,
   FormHelperText,
 } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -31,7 +31,6 @@ export default function Login(props) {
   );
   const {isLoading} = useSelector(state => state.LoadReducer);
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleCloseAlert = () => {
@@ -51,12 +50,10 @@ export default function Login(props) {
     }
   }
 
-  if(userName !== ''){
-    history.goBack();
-  }
-  if(localStorage.getItem(ACCESSTOKEN)){
-    history.push('/')
-  }
+  // if(userName !== ''){
+  //   history.push("/");
+  // }
+  
 
   useEffect(() => {
     if(errorLoadData !== null){
@@ -79,6 +76,9 @@ export default function Login(props) {
       
     },
   });
+  if(localStorage.getItem(ACCESSTOKEN)){
+    return <Redirect to='/' />
+  }
 
   return (
     <div className="login">

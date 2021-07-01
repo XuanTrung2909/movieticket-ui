@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ACCESSTOKEN, FETCH_ROOM_TICKET_SUCCESS, HIDE_LOADING, POST_TICKET_SUCCESS, RESET_ARR_TICKET_BOOKING, SHOW_LOADING } from "../../Ulti/setting"
+import { ACCESSTOKEN, FETCH_ROOM_TICKET_SUCCESS, HIDE_LOADING, POST_TICKET_SUCCESS, SHOW_LOADING } from "../../Ulti/setting"
 
 
 export const getRoomTicket = (maLichChieu) => {

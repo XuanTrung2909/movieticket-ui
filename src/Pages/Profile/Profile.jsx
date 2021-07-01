@@ -10,9 +10,12 @@ import {
   FormControl,
   InputLabel,
   Input,
-  TextField,
+  Dialog,
+  DialogActions, 
+  DialogTitle,
+  DialogContent
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Hidden } from "@material-ui/core";
 
 import ContactMailIcon from "@material-ui/icons/ContactMail";
@@ -29,30 +32,51 @@ import {
   postInfoAccount,
   putInfoAccount,
 } from "../../Redux/Actions/AccountAction";
-import { ACCESSTOKEN, SHOW_LOADING, USER_LOGIN } from "../../Ulti/setting";
+import { ACCESSTOKEN, RESET_ALERT_ACCOUNT, USER_LOGIN } from "../../Ulti/setting";
 import { Container } from "@material-ui/core";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Email, Lock, PhoneIphone, Settings } from "@material-ui/icons";
 import { useFormik } from "formik";
+import LoadingPage from './../../Components/LoadingPage/LoadingPage';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { useState } from "react";
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+
 
 export default function Profile() {
   const account = JSON.parse(localStorage.getItem(USER_LOGIN));
   const user = {
     taiKhoan: account?.taiKhoan,
   };
-  const { infoAccount } = useSelector((state) => state.AccountReducer);
+  const { infoAccount, isAlertSuccess} = useSelector((state) => state.AccountReducer);
+  const {isLoading} = useSelector(state => state.LoadReducer);
   const dispatch = useDispatch();
-  const history = useHistory();
-  if (!localStorage.getItem(ACCESSTOKEN)) {
-    history.push("/dang-nhap");
-  }
-
+  
+  const [open, setOpen] = useState(false);
+  const [checkMenu, setCheckMenu] = useState(false);
+  
   useEffect(() => {
-    dispatch({
-      type: SHOW_LOADING,
-    });
     dispatch(postInfoAccount(user));
-  }, []);
+  },[]);
+  useEffect(() => {
+    if(isAlertSuccess){
+      setOpen(true);
+    }
+  },[])
+
+  const handleCloseAlert = () => {
+    setOpen(false);
+    dispatch({
+      type: RESET_ALERT_ACCOUNT
+    })
+    
+    window.location.reload();
+  }
+  const handleCloseMenu = () => {
+    setCheckMenu(false)
+  } 
+  
 
   const renderTicketList = () => {
     return infoAccount.thongTinDatVe?.map((ticket, i) => {
@@ -60,11 +84,11 @@ export default function Profile() {
         <TableRow key={i} className="table_row">
           <TableCell className="table_cell">{i + 1}</TableCell>
           <TableCell className="table_cell">{ticket.tenPhim}</TableCell>
-          <Hidden xsDown>
+          
             <TableCell className="table_cell">{ticket.maVe}</TableCell>
             <TableCell className="table_cell">{ticket.thoiLuongPhim}</TableCell>
             <TableCell className="table_cell">{ticket.ngayDat}</TableCell>
-          </Hidden>
+          
           <TableCell className="table_cell">
             {ticket.danhSachGhe[0].tenHeThongRap}
           </TableCell>
@@ -81,25 +105,33 @@ export default function Profile() {
 
   const formik = useFormik({
     initialValues: {
-      taiKhoan: '',
-      matKhau: '',
-      email: '',
-      hoTen: '',
-      soDt: '',
-      maNhom: 'GP01',
-      maLoaiNguoiDung: 'KhachHang'
+      taiKhoan: infoAccount?.taiKhoan || '',
+      matKhau: infoAccount?.matKhau || '',
+      email: infoAccount?.email || '',
+      hoTen: infoAccount?.hoTen || '',
+      soDT: infoAccount?.soDT || '',
+      maNhom: infoAccount?.maNhom || 'GP01',
+      maLoaiNguoiDung: infoAccount?.maLoaiNguoiDung || 'KhachHang'
     },
+    enableReinitialize: true,
+
     onSubmit: (values) => {
-      console.log(values.taiKhoan);
+      dispatch(putInfoAccount(values));
     },
   });
-
+  if(isLoading){
+    return <LoadingPage />
+  }
+  if (!localStorage.getItem(ACCESSTOKEN)) {
+    return <Redirect to='/dang-nhap' />
+  }
+  
   return (
     <div className="profile">
       <div className="content">
         <Tabs className="tabs">
           <Grid container>
-            <Grid item sm={2} xs={8} className="left">
+            <Grid item sm={3} md={2} xs={12} className={checkMenu ? 'left left_show' : 'left left_hide'}>
               <div className="account">
                 <Avatar
                   src="https://i.pravatar.cc/150?u=trung.nx"
@@ -107,31 +139,43 @@ export default function Profile() {
                 />
                 <h3>{infoAccount.taiKhoan}</h3>
                 <p>Khách hàng</p>
+                <Hidden smUp>
+                  <MenuOpenIcon className='menu_show' onClick={() => {
+                    setCheckMenu(!checkMenu);
+                  }} />
+                </Hidden>
               </div>
+              
               <TabList className="tablist">
                 <h2>
                   <DnsIcon /> Thông Tin Chung
                 </h2>
                 <Divider />
                 <Tab className="tab" selectedClassName="active">
-                  <Button fullWidth>
+                  <Button fullWidth onClick={() => {
+                    handleCloseMenu()
+                  }}>
                     <ContactMailIcon /> Thông Tin Cá Nhân
                   </Button>
                 </Tab>
 
                 <Tab className="tab" selectedClassName="active">
-                  <Button fullWidth>
+                  <Button fullWidth onClick={() => {
+                  handleCloseMenu()
+                }}>
                     <ShoppingCartIcon /> Danh Sách Vé Đã Đặt
                   </Button>
                 </Tab>
                 <Tab className="tab" selectedClassName="active">
-                  <Button fullWidth>
+                  <Button fullWidth onClick={() => {
+                  handleCloseMenu()
+                }}>
                     <Settings /> Chỉnh Sửa Thông Tin
                   </Button>
                 </Tab>
               </TabList>
             </Grid>
-            <Grid item sm={10} xs={12} className="right">
+            <Grid item sm={9} md={10} xs={12} className="right">
               <Container maxWidth="md">
                 <TabPanel className="tabpanel_info">
                   <h1>Thông tin tài khoản</h1>
@@ -191,13 +235,13 @@ export default function Profile() {
                       <TableRow className="table_row">
                         <TableCell className="table_cell">STT</TableCell>
                         <TableCell className="table_cell">Tên Phim</TableCell>
-                        <Hidden xsDown>
+                        
                           <TableCell className="table_cell">Mã Vé</TableCell>
                           <TableCell className="table_cell">
                             Thời Lượng
                           </TableCell>
                           <TableCell className="table_cell">Ngày đặt</TableCell>
-                        </Hidden>
+                        
                         <TableCell className="table_cell">Rạp</TableCell>
                         <TableCell className="table_cell">Số Ghế</TableCell>
                         <TableCell className="table_cell">Giá Vé</TableCell>
@@ -270,7 +314,9 @@ export default function Profile() {
                       />
                     </FormControl>
                     <FormControl fullWidth className='form_control'>
-                      <Button type='submit'>Thay đổi</Button>
+                      <Button type='submit' onClick={() =>{
+                        setOpen(true);
+                      }} >Thay đổi</Button>
                     </FormControl>
                   </form>
                 </TabPanel>
@@ -279,6 +325,23 @@ export default function Profile() {
           </Grid>
         </Tabs>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleCloseAlert}
+        className='modal_alert'
+      >
+        <DialogTitle className={isAlertSuccess ? "title_success" : "title_error"}>
+          {isAlertSuccess ? <CheckCircleOutlineIcon /> : <ErrorOutlineIcon /> }
+        </DialogTitle>
+        <DialogContent className="content">
+          {isAlertSuccess ? <p>Thông tin tài khoản đã được chỉnh sửa</p> : <p>Chỉnh sủa không Thành công</p>}
+        </DialogContent>
+        <DialogActions className="action">
+          <Button onClick={() => {
+            handleCloseAlert()
+          }}>ok</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

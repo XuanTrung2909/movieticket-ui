@@ -6,7 +6,7 @@ import {
   Input,
   FormHelperText,
 } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postSignUp } from "../../Redux/Actions/AuthAction";
@@ -28,7 +28,6 @@ export default function SignUp(props) {
   const { errorLoadData, isSignUp } = useSelector((state) => state.AuthReducer);
   const { isLoading } = useSelector((state) => state.LoadReducer);
   const dispatch = useDispatch();
-  const history = useHistory()
 
   const handleCloseAlert = () => {
     setOpen(false);
@@ -36,9 +35,7 @@ export default function SignUp(props) {
       type: RESET_ERROR,
     });
   };
-  if(localStorage.getItem(ACCESSTOKEN)){
-    history.push('/')
-  }
+  
   useEffect(() => {
     document.title = "Tix - Đăng Ký";
   }, []);
@@ -48,6 +45,7 @@ export default function SignUp(props) {
       setOpen(true);
     }
   }, [errorLoadData, isSignUp]);
+  
 
   const formik = useFormik({
     initialValues: {
@@ -68,6 +66,9 @@ export default function SignUp(props) {
       dispatch(postSignUp(values));
     },
   });
+  if(localStorage.getItem(ACCESSTOKEN)){
+    return <Redirect to='/' />
+  }
   return (
     <div className="sign_up">
       <div className="sign_up_main">

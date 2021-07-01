@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, HIDE_LOADING, SHOW_LOADING } from "../../Ulti/setting";
+import { FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, HIDE_LOADING } from "../../Ulti/setting";
 
 export const getMovieByGroup = (idGroup) => {
   return async (dispatch) => {

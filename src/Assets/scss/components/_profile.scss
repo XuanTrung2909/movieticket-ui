@@ -4,19 +4,27 @@
     position: relative;
     height: 100rem;
     .tabs {
+      .left_show{
+        left: 0;
+      }
+      .left_hide{
+        left: -70%;
+      }
       .left {
         padding: 5rem 0;
         height: 100%;
+        transition: all 0.5s;
         @media screen and (max-width: $breakpoint-sm) {
           position: absolute;
-          left: 0;
           top: 6rem;
           background-color: $color-white;
-          display: none;
+          width: 70%;
+          z-index: 1;
         }
 
         .account {
           text-align: center;
+          position: relative;
           .avatar {
             width: 6rem;
             height: 6rem;
@@ -28,6 +36,13 @@
           p {
             font-size: $font-12;
           }
+          .menu_show{
+            position: absolute;
+            top: -3rem;
+            right: -2.5rem;
+            font-size: $font-30;
+            color: $color-primary;
+          }
         }
         .tablist {
           margin-top: 3rem;
@@ -35,6 +50,7 @@
           h2 {
             font-size: $font-20;
             color: $color-primary;
+            margin: 1rem;
             svg {
               font-size: $font-30;
               margin: 0 0.5rem -0.7rem 0;
@@ -145,16 +161,16 @@
             margin: 1rem 0;
           }
           h1{
-            padding: 1rem 0;
+            padding: 1rem;
             font-size: $font-20;
           }
           .form{
             .form_control{
-              padding: 2rem 0;
+              padding: 2rem;
               
               .input_label{
                 font-size: $font-14;
-                
+                padding: 0 2rem;
               }
               .input{
                 font-size: $font-14;
