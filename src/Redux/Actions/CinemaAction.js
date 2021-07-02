@@ -1,4 +1,5 @@
 import axios from "axios"
+import Swal from "sweetalert2"
 import { FETCH_CINEMA, HIDE_LOADING } from "../../Ulti/setting"
 
 export const getCinema = (idCinemaSystem) => {
@@ -16,7 +17,16 @@ export const getCinema = (idCinemaSystem) => {
         type: HIDE_LOADING
       })
     } catch (error) {
-      console.log(error.response.data);
+      dispatch({
+        type: HIDE_LOADING
+      })
+      Swal.fire({
+        icon: "error",
+        title: 'Oosp!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }

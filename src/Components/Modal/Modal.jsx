@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Modal(props) {
   const { isModalPlayVideo, linkTrailer } = useSelector(
-    (state) => state.MovieReducer
+    (state) => state.ModalPlayVideoReducer
   );
   
   const dispatch = useDispatch();

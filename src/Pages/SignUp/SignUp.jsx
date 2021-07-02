@@ -11,40 +11,22 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postSignUp } from "../../Redux/Actions/AuthAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Dialog } from "@material-ui/core";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import { useState } from "react";
+
 import { useEffect } from "react";
-import { ACCESSTOKEN, RESET_ERROR } from "../../Ulti/setting";
-import LoadingPage from "../../Components/LoadingPage/LoadingPage";
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { ACCESSTOKEN, RESET_IS_SIGNUP } from "../../Ulti/setting";
 
 export default function SignUp(props) {
-  const [open, setOpen] = useState(false);
-  const { errorLoadData, isSignUp } = useSelector((state) => state.AuthReducer);
-  const { isLoading } = useSelector((state) => state.LoadReducer);
+
+  const {isSignUp} = useSelector(state => state.AuthReducer);
+ 
   const dispatch = useDispatch();
 
-  const handleCloseAlert = () => {
-    setOpen(false);
-    dispatch({
-      type: RESET_ERROR,
-    });
-  };
+  
   
   useEffect(() => {
     document.title = "Tix - Đăng Ký";
   }, []);
 
-  useEffect(() => {
-    if (errorLoadData !== null || isSignUp === true) {
-      setOpen(true);
-    }
-  }, [errorLoadData, isSignUp]);
   
 
   const formik = useFormik({
@@ -68,6 +50,12 @@ export default function SignUp(props) {
   });
   if(localStorage.getItem(ACCESSTOKEN)){
     return <Redirect to='/' />
+  }
+  if(isSignUp) {
+    dispatch({
+      type: RESET_IS_SIGNUP
+    })
+    return <Redirect to='/dang-nhap' />
   }
   return (
     <div className="sign_up">
@@ -183,12 +171,6 @@ export default function SignUp(props) {
             <Button
               size="large"
               type="submit"
-              onClick={() => {
-                
-                if (errorLoadData !== null || isSignUp === true) {
-                  setOpen(true);
-                }
-              }}
             >
               Đăng Nhập
             </Button>
@@ -199,38 +181,8 @@ export default function SignUp(props) {
           </FormControl>
         </form>
       </div>
-      {isLoading ? <LoadingPage /> : null}
+      
 
-      <Dialog
-        open={open}
-        onClose={handleCloseAlert}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        className="modal_alert"
-      >
-        <DialogTitle
-          id="alert-dialog-title"
-          className={isSignUp ? "title_success" : "title_error"}
-        >
-          {isSignUp ? <CheckCircleOutlineIcon /> : <ErrorOutlineIcon />}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description" className="content">
-            {isSignUp ? "Đăng Ký Tài Khoản Thành Công" : `${ errorLoadData }`}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions className="action">
-          <Link to={isSignUp ? '/dang-nhap' : '/dang-ky'} className='link'>
-            <Button
-              onClick={handleCloseAlert}
-              variant="outlined"
-              className={isSignUp ? "btn_success" : "btn_error"}
-            >
-              OK
-            </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 }

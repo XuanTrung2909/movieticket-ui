@@ -12,54 +12,18 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../Redux/Actions/AuthAction";
 import LoadingPage from "../../Components/LoadingPage/LoadingPage";
-
-import { Dialog } from "@material-ui/core";
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { useState } from "react";
 import { useEffect } from "react";
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import { ACCESSTOKEN, RESET_ERROR } from "../../Ulti/setting";
+import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
 
 export default function Login(props) {
-  const [open, setOpen] = useState(false);
- 
-  const { errorLoadData, userName } = useSelector(
-    (state) => state.AuthReducer
-  );
-  const {isLoading} = useSelector(state => state.LoadReducer);
+  const { isLoading } = useSelector((state) => state.LoadReducer);
+  const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN))
 
   const dispatch = useDispatch();
 
-  const handleCloseAlert = () => {
-    setOpen(false);
-    dispatch({
-      type: RESET_ERROR
-    })
-  }
   useEffect(() => {
-    document.title = 'Tix - Đăng Nhập';
-  },[])
-
-
-  const showError = () => {
-    if(errorLoadData !== null){
-      setOpen(true);
-    }
-  }
-
-  // if(userName !== ''){
-  //   history.push("/");
-  // }
-  
-
-  useEffect(() => {
-    if(errorLoadData !== null){
-      setOpen(true);
-    }
-  },[errorLoadData])
+    document.title = "Tix - Đăng Nhập";
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -73,13 +37,17 @@ export default function Login(props) {
     onSubmit: (values) => {
       const action = postLogin(values);
       dispatch(action);
-      
     },
   });
-  if(localStorage.getItem(ACCESSTOKEN)){
-    return <Redirect to='/' />
+  if (isLoading) {
+    return <LoadingPage />;
   }
-
+  if(userLogin?.maLoaiNguoiDung === 'KhachHang'){
+    return <Redirect to='/' />
+  }else 
+  if(userLogin?.maLoaiNguoiDung === 'QuanTri'){
+    return <Redirect to='/dashboard' />
+  }
   return (
     <div className="login">
       <div className="login_main">
@@ -140,40 +108,16 @@ export default function Login(props) {
             ) : null}
           </FormControl>
           <FormControl fullWidth margin="normal">
-            <Button size="large" type="submit" 
-            onClick={showError}
-            >
+            <Button size="large" type="submit">
               Đăng Nhập
             </Button>
             <p>
               Nếu bạn chưa có tài khoản, hãy{" "}
-              <Link to="/dang-ky" >đăng ký tài khoản tại đây</Link>
+              <Link to="/dang-ky">đăng ký tài khoản tại đây</Link>
             </p>
           </FormControl>
         </form>
       </div>
-      {isLoading ? <LoadingPage /> : null}
-      <Dialog
-        open={open}
-        onClose={handleCloseAlert}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        className='modal_alert'
-      >
-        <DialogTitle id="alert-dialog-title" className='title_error'>
-          <ErrorOutlineIcon /> 
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description" className='content'>
-            {errorLoadData}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions className='action'>
-          <Button onClick={handleCloseAlert} variant='outlined' className='btn_error' >
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 }

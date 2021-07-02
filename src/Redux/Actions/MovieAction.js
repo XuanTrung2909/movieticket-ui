@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import { FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, HIDE_LOADING } from "../../Ulti/setting";
 
 export const getMovieByGroup = (idGroup) => {
@@ -14,7 +15,14 @@ export const getMovieByGroup = (idGroup) => {
       })
       dispatch({type: HIDE_LOADING})
     } catch (error) {
-      console.log(error.response.data);
+      dispatch({type: HIDE_LOADING})
+      Swal.fire({
+        icon: "error",
+        title: 'Oosp!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   };
 };
@@ -34,7 +42,16 @@ export const getMovieDetail = (maPhim) => {
         type: HIDE_LOADING
       })
     } catch (error) {
-      // console.log(error.response.data);
+      dispatch({
+        type: HIDE_LOADING
+      })
+      Swal.fire({
+        icon: "error",
+        title: 'Oosp!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
 }

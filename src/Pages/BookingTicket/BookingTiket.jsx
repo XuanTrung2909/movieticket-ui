@@ -2,7 +2,6 @@ import { Grid, Divider, Avatar, Hidden, Chip } from "@material-ui/core";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import {
   getRoomTicket,
   postBookingTicket,
@@ -11,7 +10,6 @@ import {
   ACCESSTOKEN,
   ADD_TICKET_BOOKING,
   DELETE_TICKET_BOOKING,
-  RESET_ARR_TICKET_BOOKING,
   SHOW_LOADING,
   USER_LOGIN,
 } from "./../../Ulti/setting";
@@ -31,21 +29,17 @@ import { useAlert } from "react-alert";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import LoadingPage from "./../../Components/LoadingPage/LoadingPage";
 import { Link, Redirect } from "react-router-dom";
-import { Dialog } from "@material-ui/core";
-import { DialogTitle } from "@material-ui/core";
-import { DialogContent } from "@material-ui/core";
-import { DialogActions } from "@material-ui/core";
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+
 
 export default function BookingTiket(props) {
   const alert = useAlert();
-  const history = useHistory();
-  const { roomTicket, arrTicketBooking, isBookTicket } = useSelector(
+  const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN))
+  const { roomTicket, arrTicketBooking } = useSelector(
     (state) => state.TicketReducer
   );
   const { isLoading } = useSelector((state) => state.LoadReducer);
   const dispatch = useDispatch();
-  const userName = JSON.parse(localStorage.getItem(USER_LOGIN));
+  
 
   const { maLichChieu } = props.match.params;
   useEffect(() => {
@@ -58,12 +52,12 @@ export default function BookingTiket(props) {
   const tickets = {
     maLichChieu: maLichChieu,
     danhSaChVe: arrTicketBooking,
-    taiKhoanNguoiDung: userName.taiKhoan,
+    taiKhoanNguoiDung: userLogin?.taiKhoan,
   };
 
   useEffect(() => {
     dispatch(getRoomTicket(maLichChieu));
-  }, [arrTicketBooking, isBookTicket]);
+  }, [arrTicketBooking]);
 
   
 
@@ -143,10 +137,6 @@ export default function BookingTiket(props) {
     });
   };
 
-  const handleClose = () => {
-    dispatch({type: RESET_ARR_TICKET_BOOKING});
-  }
-
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -214,11 +204,11 @@ export default function BookingTiket(props) {
             <div className="signed">
               <Link
                 className="link"
-                to={`/thong-tin-tai-khoan/${userName.taiKhoan}`}
+                to={`/thong-tin-tai-khoan/${userLogin?.taiKhoan}`}
                 className="chip"
               >
                 <Chip
-                  label={userName.taiKhoan}
+                  label={userLogin?.taiKhoan}
                   avatar={
                     <Avatar src="https://i.pravatar.cc/150?u=trung.nx"></Avatar>
                   }
@@ -273,17 +263,7 @@ export default function BookingTiket(props) {
           </div>
         </Grid>
       </Grid>
-      <Dialog open={isBookTicket} onClose={handleClose} className='modal_alert'>
-        <DialogTitle className={isBookTicket ? "title_success" : "title_error"}>
-        {isBookTicket ? <CheckCircleOutlineIcon /> : <ErrorOutlineIcon />}
-        </DialogTitle>
-        <DialogContent>
-          {isBookTicket ? <p>Đã đăng ký thành công</p> : <p>Đặt vé Thành Công</p>}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>OK</Button>
-        </DialogActions>
-      </Dialog>
+      
     </div>
   );
 }

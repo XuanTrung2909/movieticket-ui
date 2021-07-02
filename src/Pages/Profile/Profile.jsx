@@ -10,10 +10,7 @@ import {
   FormControl,
   InputLabel,
   Input,
-  Dialog,
-  DialogActions, 
-  DialogTitle,
-  DialogContent
+  
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { Hidden } from "@material-ui/core";
@@ -32,47 +29,34 @@ import {
   postInfoAccount,
   putInfoAccount,
 } from "../../Redux/Actions/AccountAction";
-import { ACCESSTOKEN, RESET_ALERT_ACCOUNT, USER_LOGIN } from "../../Ulti/setting";
+import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
 import { Container } from "@material-ui/core";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Email, Lock, PhoneIphone, Settings } from "@material-ui/icons";
 import { useFormik } from "formik";
 import LoadingPage from './../../Components/LoadingPage/LoadingPage';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { useState } from "react";
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 
 
 export default function Profile() {
-  const account = JSON.parse(localStorage.getItem(USER_LOGIN));
+  const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
+ 
   const user = {
-    taiKhoan: account?.taiKhoan,
+    taiKhoan: userLogin?.taiKhoan,
   };
-  const { infoAccount, isAlertSuccess} = useSelector((state) => state.AccountReducer);
+  const { infoAccount } = useSelector((state) => state.AccountReducer);
   const {isLoading} = useSelector(state => state.LoadReducer);
   const dispatch = useDispatch();
   
-  const [open, setOpen] = useState(false);
+  
   const [checkMenu, setCheckMenu] = useState(false);
   
   useEffect(() => {
     dispatch(postInfoAccount(user));
   },[]);
-  useEffect(() => {
-    if(isAlertSuccess){
-      setOpen(true);
-    }
-  },[])
+  
 
-  const handleCloseAlert = () => {
-    setOpen(false);
-    dispatch({
-      type: RESET_ALERT_ACCOUNT
-    })
-    
-    window.location.reload();
-  }
   const handleCloseMenu = () => {
     setCheckMenu(false)
   } 
@@ -264,7 +248,7 @@ export default function Profile() {
                       </InputLabel>
                       <Input className="input" />
                     </FormControl>
-                    <FormControl className="form_control" fullWidth>
+                    <FormControl className="form_control" fullWidth required>
                       <InputLabel className="input_label">Mật Khẩu</InputLabel>
                       <Input
                         className="input"
@@ -314,9 +298,7 @@ export default function Profile() {
                       />
                     </FormControl>
                     <FormControl fullWidth className='form_control'>
-                      <Button type='submit' onClick={() =>{
-                        setOpen(true);
-                      }} >Thay đổi</Button>
+                      <Button type='submit' >Thay đổi</Button>
                     </FormControl>
                   </form>
                 </TabPanel>
@@ -325,23 +307,7 @@ export default function Profile() {
           </Grid>
         </Tabs>
       </div>
-      <Dialog
-        open={open}
-        onClose={handleCloseAlert}
-        className='modal_alert'
-      >
-        <DialogTitle className={isAlertSuccess ? "title_success" : "title_error"}>
-          {isAlertSuccess ? <CheckCircleOutlineIcon /> : <ErrorOutlineIcon /> }
-        </DialogTitle>
-        <DialogContent className="content">
-          {isAlertSuccess ? <p>Thông tin tài khoản đã được chỉnh sửa</p> : <p>Chỉnh sủa không Thành công</p>}
-        </DialogContent>
-        <DialogActions className="action">
-          <Button onClick={() => {
-            handleCloseAlert()
-          }}>ok</Button>
-        </DialogActions>
-      </Dialog>
+      
     </div>
   );
 }

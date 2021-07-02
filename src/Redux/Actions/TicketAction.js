@@ -1,5 +1,7 @@
 import axios from "axios"
-import { ACCESSTOKEN, FETCH_ROOM_TICKET_SUCCESS, HIDE_LOADING, POST_TICKET_SUCCESS, SHOW_LOADING } from "../../Ulti/setting"
+import Swal from "sweetalert2"
+
+import { ACCESSTOKEN, FETCH_ROOM_TICKET_SUCCESS, HIDE_LOADING, RESET_ARR_TICKET_BOOKING } from "../../Ulti/setting"
 
 
 export const getRoomTicket = (maLichChieu) => {
@@ -17,7 +19,15 @@ export const getRoomTicket = (maLichChieu) => {
         type: HIDE_LOADING
       })
     } catch (error) {
-      console.log(error.response.data);
+      dispatch({
+        type: HIDE_LOADING
+      })
+      Swal.fire({
+        icon: 'error',
+        title:'Oops!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false
+      })
     }
   }
 }
@@ -25,10 +35,14 @@ export const getRoomTicket = (maLichChieu) => {
 export const postBookingTicket = (tickets) => {
   
   return async(dispatch) => {
-    dispatch({
-      type: SHOW_LOADING
-    })
+   
     try {
+      Swal.fire({
+        icon:'info',
+        title: 'Waiting... !!!',
+        text: 'Đang xử lý...!!!',
+        showConfirmButton:false
+      })
       await axios({
         url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe',
         method: 'POST',
@@ -37,12 +51,22 @@ export const postBookingTicket = (tickets) => {
           Authorization: `Bearer ` + JSON.parse(localStorage.getItem(ACCESSTOKEN)),
       }
       })
-      dispatch({
-        type: POST_TICKET_SUCCESS
+      
+      Swal.fire({
+        icon:'success',
+        title: 'Đặt vé Thành Công',
+        showConfirmButton: false,
+        timer: 3000
       })
-      dispatch({type: HIDE_LOADING})
+      dispatch({type: RESET_ARR_TICKET_BOOKING})
     } catch (error) {
-      console.log(error.response);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!!!',
+        text: `${error.response?.data}`,
+        timer: 3000
+      })
+      
     }
   }
 }

@@ -79,7 +79,7 @@ export default function Header(props) {
             </List>
           </Hidden>
           <Hidden smDown>
-            {userName.trim() !== "" ? (
+            {localStorage.getItem(ACCESSTOKEN) ? (
               <List className="signed">
                 <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
                   <Button>
@@ -125,7 +125,7 @@ export default function Header(props) {
         onClose={handleCloseMenu}
       >
         <List className="sign_mobile">
-          {userName.trim() !== "" ? (
+          {localStorage.getItem(ACCESSTOKEN) ? (
             <List className="signed_mobile">
               <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
                 <Button>

@@ -1,9 +1,9 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   ACCESSTOKEN,
   FETCH_INFO_ACCOUNT,
   HIDE_LOADING,
-  PUT_ACCOUNT_SUCCESS,
   SHOW_LOADING,
 } from "../../Ulti/setting";
 
@@ -27,9 +27,15 @@ export const postInfoAccount = (user) => {
       })
       
     } catch (error) {
-      console.log(error.response);
       dispatch({
         type: HIDE_LOADING
+      })
+      Swal.fire({
+        icon: 'error',
+        title: 'Oosp!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
       })
     }
   };
@@ -37,10 +43,15 @@ export const postInfoAccount = (user) => {
 
 export const putInfoAccount = (user) => {
   return async (dispatch) => {
-    dispatch({
-      type: SHOW_LOADING
-    })
+    
     try {
+      Swal.fire({
+        icon: 'info',
+        title: 'Waiting...!!!',
+        text: 'Đang xử lý...!!!',
+        showConfirmButton: false,
+        allowOutsideClick: false
+      })
       await axios({
         url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
         method: "PUT",
@@ -50,14 +61,21 @@ export const putInfoAccount = (user) => {
             "Bearer " + JSON.parse(localStorage.getItem(ACCESSTOKEN)),
         },
       });
-      dispatch({
-        type: PUT_ACCOUNT_SUCCESS
+      Swal.fire({
+        icon: 'success',
+        title: 'Yeah!!!',
+        text: 'Thông tin đã được chỉnh sửa',
+        showConfirmButton: false,
+        timer: 3000
       })
-      dispatch({type: HIDE_LOADING})
+      window.location.reload();
     } catch (error) {
-      console.log(error.response);
-      dispatch({
-        type: HIDE_LOADING
+      Swal.fire({
+        icon: 'error',
+        title: 'Oosp!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
       })
     }
   };
