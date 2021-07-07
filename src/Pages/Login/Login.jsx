@@ -17,12 +17,11 @@ import { USER_LOGIN } from "../../Ulti/setting";
 
 export default function Login(props) {
   const { isLoading } = useSelector((state) => state.LoadReducer);
-  const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN))
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "Tix - Đăng Nhập";
+    document.title = "Đăng Nhập";
   }, []);
 
   const formik = useFormik({

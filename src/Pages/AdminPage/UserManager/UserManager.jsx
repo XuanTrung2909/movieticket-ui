@@ -47,6 +47,10 @@ export default function UserManager() {
   useEffect(() => {
     dispatch(getAccountListByPage(page));
   }, [accountListByPage, page, accountSearch]);
+  useEffect(() => {
+    document.title = 'Quản lý tài khoản'
+  },[])
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

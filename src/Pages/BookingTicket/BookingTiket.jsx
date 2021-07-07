@@ -49,6 +49,10 @@ export default function BookingTiket(props) {
     dispatch(getRoomTicket(maLichChieu));
   }, []);
 
+  useEffect(() => {
+    document.title = 'Đặt vé';
+  },[])
+
   const tickets = {
     maLichChieu: maLichChieu,
     danhSaChVe: arrTicketBooking,

@@ -34,6 +34,9 @@ export default function MovieDetail(props) {
     })
     dispatch(getMovieDetail(maPhim));
   }, []);
+  useEffect(() => {
+    document.title = 'Chi tiết phim'
+  },[]);
 
   const handleScrollBooking = (idElement) => {
     return document.getElementById(idElement).scrollIntoView({

@@ -55,7 +55,9 @@ export default function Profile() {
   useEffect(() => {
     dispatch(postInfoAccount(user));
   },[]);
-  
+  useEffect(() => {
+    document.title = 'Thông tin tài khoản'
+  },[]);
 
   const handleCloseMenu = () => {
     setCheckMenu(false)

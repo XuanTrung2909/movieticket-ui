@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Pagination } from "@material-ui/lab";
-import { Cancel, Delete, Edit, Search } from "@material-ui/icons";
+import { Delete, Edit} from "@material-ui/icons";
 import { useFormik } from "formik";
 import {
   addMovie,
@@ -34,7 +34,6 @@ import moment from 'moment'
 
 export default function MovieManager() {
   const { movieListByPage } = useSelector((state) => state.MovieReducer);
-  const [imgSrc, setImgSrc] = useState("");
   const [openDialogCreate, setOpenDialogCreate] = useState(false);
   const [openDialogUpdate, setOpenDialogUpdate] = useState(false);
   let [movieEdit, setMovieEdit] = useState({});
@@ -45,6 +44,9 @@ export default function MovieManager() {
   useEffect(() => {
     dispatch(getMovieListByPage(page));
   }, [page, movieListByPage]);
+  useEffect(() => {
+    document.title = 'Quản lý phim'
+  },[])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

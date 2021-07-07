@@ -22,7 +22,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "Tix - Trang Chủ";
+    document.title = "Trang Chủ";
     dispatch({
       type: SHOW_LOADING
     })
