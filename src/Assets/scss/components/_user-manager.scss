@@ -130,7 +130,9 @@
             border-bottom: 2px solid $color-primary;
           }
         }
-        
+        img{
+          width: 20rem;
+        }
         button{
           margin: 3rem;
           background-color: $color-secondary;

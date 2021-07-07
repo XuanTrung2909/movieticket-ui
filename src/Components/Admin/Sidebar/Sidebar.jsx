@@ -7,7 +7,7 @@ import {
   Avatar,
   Divider,
 } from "@material-ui/core";
-import { SupervisorAccount, MovieCreation, Dashboard } from "@material-ui/icons";
+import { SupervisorAccount, MovieCreation } from "@material-ui/icons";
 
 import { NavLink } from "react-router-dom";
 import { USER_LOGIN } from "../../../Ulti/setting";

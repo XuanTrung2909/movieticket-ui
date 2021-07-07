@@ -80,7 +80,7 @@ export const getMovieListByPage = (page) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops!!!',
-        text: `${error.response.data}`,
+        text: `${error.response?.data}`,
         showConfirmButton: false,
         timer: 3000
       })
@@ -125,3 +125,79 @@ export const deleteMovie = (maPhim) => {
   }
 }
 
+export const addMovie = (formData) => {
+  return async(dispatch) => {
+    try {
+      Swal.fire({
+        icon: 'info',
+        title: 'Waiting...!!!',
+        text: 'Đang xử lý ...!!!',
+        showConfirmButton: false,
+        timer: 3000,
+        allowOutsideClick: false
+      })
+      await axios({
+        url:`https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh`,
+        method: 'POST',
+        data: formData,
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem(ACCESSTOKEN))
+        }
+      })
+      Swal.fire({
+        icon: 'success',
+        title: 'Yeah !!!',
+        text: `Thêm Phim Mới thành công`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+      
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+    }
+  }
+}
+export const editMovie = (formData) => {
+  return async(dispatch) => {
+    try {
+      Swal.fire({
+        icon: 'info',
+        title: 'Waiting...!!!',
+        text: 'Đang xử lý ...!!!',
+        showConfirmButton: false,
+        timer: 3000,
+        allowOutsideClick: false
+      })
+      await axios({
+        url:`https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload`,
+        method: 'POST',
+        data: formData,
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem(ACCESSTOKEN))
+        }
+      })
+      Swal.fire({
+        icon: 'success',
+        title: 'Yeah !!!',
+        text: `Chỉnh sửa thông tin thành công`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+      
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+    }
+  }
+}
