@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../Redux/Actions/AuthAction";
 import LoadingPage from "../../Components/LoadingPage/LoadingPage";
 import { useEffect } from "react";
-import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
+import { USER_LOGIN } from "../../Ulti/setting";
 
 export default function Login(props) {
   const { isLoading } = useSelector((state) => state.LoadReducer);
@@ -42,11 +42,8 @@ export default function Login(props) {
   if (isLoading) {
     return <LoadingPage />;
   }
-  if(userLogin?.maLoaiNguoiDung === 'KhachHang'){
+  if(localStorage.getItem(USER_LOGIN)){
     return <Redirect to='/' />
-  }else 
-  if(userLogin?.maLoaiNguoiDung === 'QuanTri'){
-    return <Redirect to='/dashboard' />
   }
   return (
     <div className="login">

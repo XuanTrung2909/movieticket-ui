@@ -33,17 +33,18 @@
       }
     }
     .signed {
-      .link {
+      
         .chip{
           font-size: $font-14;
           cursor: pointer;
         }
         margin: 0 2rem;
         
-      }
+      
       button{
         font-size: $font-14;
         border-radius: 2rem;
+        text-transform: unset;
       }
     }
   }
@@ -57,14 +58,13 @@
   .sign_mobile, .signed_mobile {
     display: flex;
     justify-content: space-around;
-    li {
+    
       display: block;
       margin: 0 2rem;
       button {
         font-size: 1rem;
         border-radius: 2rem;
       }
-    }
   }
 
   .nav_mobile {
@@ -81,4 +81,7 @@
     }
   }
   
+}
+.popover{
+  font-size: $font-14;
 }

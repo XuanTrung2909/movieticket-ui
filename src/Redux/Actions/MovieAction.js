@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, HIDE_LOADING } from "../../Ulti/setting";
+import { ACCESSTOKEN, FETCH_MOVIE_DETAIL_SUCCESS, GET_MOVIE_BY_GROUP, GET_MOVIE_LIST_BY_PAGE, HIDE_LOADING, SHOW_LOADING } from "../../Ulti/setting";
 
 export const getMovieByGroup = (idGroup) => {
   return async (dispatch) => {
@@ -55,3 +55,73 @@ export const getMovieDetail = (maPhim) => {
     }
   }
 }
+
+export const getMovieListByPage = (page) => {
+  return async(dispatch) => {
+    dispatch({
+      type: SHOW_LOADING
+    })
+    try {
+      const result = await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=${page}&soPhanTuTrenTrang=10`,
+        method: 'GET'
+      })
+      dispatch({
+        type: GET_MOVIE_LIST_BY_PAGE,
+        movieListByPage: result.data
+      })
+      dispatch({
+        type: HIDE_LOADING
+      })
+    } catch (error) {
+      dispatch({
+        type: HIDE_LOADING
+      })
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!!!',
+        text: `${error.response.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+    }
+  }
+}
+
+export const deleteMovie = (maPhim) => {
+  return async(dispatch) => {
+    try {
+      Swal.fire({
+        icon: 'info',
+        title: 'Waiting...!!!',
+        text: 'Đang xử lý ...!!!',
+        showConfirmButton: false,
+        timer: 3000,
+        allowOutsideClick: false
+      })
+      const result = await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem(ACCESSTOKEN))
+        }
+      })
+      Swal.fire({
+        icon: 'success',
+        title: 'Yeah !!!',
+        text: `${result.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!!!',
+        text: `${error.response?.data}`,
+        showConfirmButton: false,
+        timer: 3000
+      })
+    }
+  }
+}
+

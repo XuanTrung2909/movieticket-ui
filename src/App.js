@@ -13,7 +13,9 @@ import Modal from "./Components/Modal/Modal";
 import MovieDetail from "./Pages/MovieDetail/MovieDetail";
 import BookingTiket from "./Pages/BookingTicket/BookingTiket";
 import Profile from "./Pages/Profile/Profile";
-
+import AdminTemplate from "./Template/AdminTemplate/AdminTemplate";
+import UserManager from './Pages/AdminPage/UserManager/UserManager';
+import MovieManager from './Pages/AdminPage/MovieManager/MovieManager';
 
 
 
@@ -29,6 +31,9 @@ function App() {
           <UserTemplate path='/thong-tin-tai-khoan/:taiKhoan' exact component={Profile} />
           <UserTemplate path='/chi-tiet-phim/:maPhim' exact component={MovieDetail} />
           <Route path='/dat-ve/:maLichChieu' exact component={BookingTiket} />
+          <AdminTemplate path='/admin/quan-ly-tai-khoan' exact component={UserManager} />
+          <AdminTemplate path='/admin/quan-ly-phim' exact component={MovieManager} />
+          <AdminTemplate path='/admin' exact component={UserManager} />
           <UserTemplate path="/" exact component={Home} />
         </Switch>
       </BrowserRouter>

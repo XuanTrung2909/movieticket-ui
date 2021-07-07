@@ -9,6 +9,8 @@ import {
   Toolbar,
   Chip,
   Avatar,
+  Popover,
+  ListItem,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -20,7 +22,7 @@ import { ACCESSTOKEN, USER_LOGIN } from "../../Ulti/setting";
 export default function Header(props) {
   const { userName } = useSelector((state) => state.AuthReducer);
   const history = useHistory();
-
+  const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
   const [checkMenu, setCheckMenu] = useState(false);
   const handleOpenMenu = () => {
     setCheckMenu(true);
@@ -47,6 +49,19 @@ export default function Header(props) {
     handlScrollIntoId(id);
     setCheckMenu(false);
   };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
     <div className="header">
       <AppBar position="fixed" color="default">
@@ -81,21 +96,18 @@ export default function Header(props) {
           <Hidden smDown>
             {localStorage.getItem(ACCESSTOKEN) ? (
               <List className="signed">
-                <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
-                  <Button>
-                    <Chip
-                      label={userName}
-                      avatar={
-                        <Avatar
-                          className="avatar"
-                          src="https://i.pravatar.cc/150?u=trung.nx"
-                        ></Avatar>
-                      }
-                      className="chip"
-                    ></Chip>
-                  </Button>
-                </Link>
-                <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
+                <Button onClick={handleClick}>
+                  <Chip
+                    label={userName}
+                    avatar={
+                      <Avatar
+                        className="avatar"
+                        src="https://i.pravatar.cc/150?u=trung.nx"
+                      ></Avatar>
+                    }
+                    className="chip"
+                  ></Chip>
+                </Button>
               </List>
             ) : (
               <List className="header_sign">
@@ -127,21 +139,18 @@ export default function Header(props) {
         <List className="sign_mobile">
           {localStorage.getItem(ACCESSTOKEN) ? (
             <List className="signed_mobile">
-              <Link to={`/thong-tin-tai-khoan/${userName}`} className="link">
-                <Button>
-                  <Chip
-                    label={userName}
-                    avatar={
-                      <Avatar
-                        className="avatar"
-                        src="https://i.pravatar.cc/150?u=trung.nx"
-                      ></Avatar>
-                    }
-                    className="chip"
-                  ></Chip>
-                </Button>
-              </Link>
-              <Button onClick={handleDeleteUserCurrent}>Đăng Xuất</Button>
+              <Button onClick={handleClick}>
+                <Chip
+                  label={userName}
+                  avatar={
+                    <Avatar
+                      className="avatar"
+                      src="https://i.pravatar.cc/150?u=trung.nx"
+                    ></Avatar>
+                  }
+                  className="chip"
+                ></Chip>
+              </Button>
             </List>
           ) : (
             <List className="sign_mobile">
@@ -176,6 +185,45 @@ export default function Header(props) {
           </li>
         </List>
       </Drawer>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        className="popover"
+      >
+        <List>
+          <ListItem button onClick={() => {
+            handleCloseMenu();
+            handleClose();
+          }}>
+            <Link className="link" to={`/thong-tin-tai-khoan/${userName}`}>
+              Thông tin tài khoản
+            </Link>
+          </ListItem>
+          {userLogin?.maLoaiNguoiDung === "QuanTri" ? (
+            <ListItem button onClick={() => {
+              handleCloseMenu();
+              handleClose();
+            }}>
+              <Link className="link" to="/admin">
+                Admin Manager
+              </Link>
+            </ListItem>
+          ) : null}
+          <ListItem button onClick={handleDeleteUserCurrent}>
+            Đăng Xuất
+          </ListItem>
+        </List>
+      </Popover>
     </div>
   );
 }

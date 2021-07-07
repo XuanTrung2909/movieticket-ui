@@ -1,0 +1,76 @@
+.movie_manager {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  .top{
+    padding: 3rem 0;
+    border-radius: 0.5rem;
+    hr{
+      margin: 1rem 0;
+    }
+    button{
+      margin: 2rem 0 0 0;
+      background-color: $color-secondary;
+      color: $color-white;
+      font-size: $font-16;
+      padding: 1rem 2rem;
+    }
+  }
+
+  .content {
+    overflow: auto;
+    .table {
+      
+      .table_head {
+        .table_head_row {
+          background-color: $color-primary;
+          .table_head_cell {
+            color: $color-white;
+            font-size: $font-16;
+            @media screen and (max-width: $breakpoint-sm) {
+              font-size: $font-12;
+            }
+          }
+        }
+      }
+      .table_body {
+        .table_body_row {
+          .table_body_cell {
+            font-size: $font-14;
+            img{
+              width: 8rem;
+              height: auto;
+            }
+            @media screen and (max-width: $breakpoint-sm) {
+              font-size: $font-12;
+            }
+            svg{
+              font-size: $font-14;
+            }
+            .btn_edit{
+              color: $color-secondary;
+            }
+            .btn_delete{
+              color: $color-primary;
+            }
+          }
+        }
+      }
+    }
+    .pagination{
+      padding: 3rem 0;
+      ul{
+        justify-content: center;
+        font-size: $font-14;
+        li{
+          button{
+            font-size: $font-14;
+          }
+        }
+        .Mui-selected{
+          background-color: $color-primary;
+          color: $color-white;
+        }
+      }
+    }
+  }
+}
